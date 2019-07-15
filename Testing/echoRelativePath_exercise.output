@@ -1,0 +1,11 @@
+echoRelativePath_exercise...
+============================
+echoRelativePath . .	: .
+echoRelativePath .. ..	: .
+echoRelativePath .. .	: *
+echoRelativePath . ..	: ..
+echoRelativePath ../../alpha ../../beta	: ../beta
+echoRelativePath ../../../ ./alpha/beta////	: */*/*/alpha/beta
+echoRelativePath ./alpha/beta ../../../	: ../../../../..
+echoRelativePath ./alpha/../beta/./.././gamma/delta/epsilon/ .	: ../../..
+============================
