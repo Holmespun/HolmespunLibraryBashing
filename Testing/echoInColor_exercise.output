@@ -1,0 +1,10 @@
+echoInColor_exercise...
+=======================
+[38;5;12mechoInColorBlue[0m
+[38;5;10mechoInColorGreen[0m
+[38;5;9mechoInColorRed[0m
+[38;5;9m[1mechoInColorRedBold[0m
+[38;5;15mechoInColorWhite[0m
+[38;5;15m[1mechoInColorWhiteBold[0m
+[38;5;11mechoInColorYellow[0m
+=======================

@@ -1,11 +1,18 @@
 echoRelativePath_exercise...
 ============================
-echoRelativePath . .	: .
-echoRelativePath .. ..	: .
-echoRelativePath .. .	: *
-echoRelativePath . ..	: ..
-echoRelativePath ../../alpha ../../beta	: ../beta
-echoRelativePath ../../../ ./alpha/beta////	: */*/*/alpha/beta
-echoRelativePath ./alpha/beta ../../../	: ../../../../..
-echoRelativePath ./alpha/../beta/./.././gamma/delta/epsilon/ .	: ../../..
+echoRelativePath . .	yields .
+----------------------------
+echoRelativePath .. ..	yields .
+----------------------------
+echoRelativePath .. .	yields *
+----------------------------
+echoRelativePath . ..	yields ..
+----------------------------
+echoRelativePath ../../alpha ../../beta	yields ../beta
+----------------------------
+echoRelativePath ../../../ ./alpha/beta////	yields */*/*/alpha/beta
+----------------------------
+echoRelativePath ./alpha/beta ../../../	yields ../../../../..
+----------------------------
+echoRelativePath ./alpha/../beta/./.././gamma/delta/epsilon/ .	yields ../../..
 ============================
