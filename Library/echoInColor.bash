@@ -100,6 +100,7 @@ function __echoInColor() {
 
 function echoInColorBlue()	{ __echoInColor "38;5;12"	"${*}"; }
 function echoInColorGreen()	{ __echoInColor "38;5;10"	"${*}"; }
+function echoInColorGreenBold()	{ __echoInColor "38;5;10m\\e[1"	"${*}"; }
 function echoInColorRed()	{ __echoInColor "38;5;9"	"${*}"; }
 function echoInColorRedBold()	{ __echoInColor "38;5;9m\\e[1"	"${*}"; }
 function echoInColorWhite()	{ __echoInColor "38;5;15"	"${*}"; }
