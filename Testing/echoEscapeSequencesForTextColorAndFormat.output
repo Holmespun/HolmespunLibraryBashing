@@ -1,0 +1,12 @@
+USAGE: echoEscapeSequencesForTextColorAndFormat.bash <request>
+USAGE: Where the <request> may be one of...
+USAGE:       CP16ALL       - Color Palette  16 complete     (   342 lines)
+USAGE:       CP256ALL      - Color Palette 256 complete     ( 77826 lines)
+USAGE:       CP256BG       - Color Palette 256 backgrounds  (   306 lines)
+USAGE:       CP256FG       - Color Palette 256 foregrounds  (   306 lines)
+USAGE:       TRUE 32	   - 24-bit RGB True Color step 32  (708590 lines)
+USAGE:       TRUE 64	   - 24-bit RGB True Color step 64  ( 25002 lines)
+USAGE:       TRUE 128	   - 24-bit RGB True Color step 128 (  1460 lines)
+USAGE:       TRUE <period> - 24-bit RGB True Color
+USAGE:            Where <period> defines how many of the 256-value R, G, and B parts should be skipped,
+USAGE:            The default period of 64 shows five parts (0, 64, 128, 192, and 255) for each R, G, and B.
