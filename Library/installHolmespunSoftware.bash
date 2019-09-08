@@ -78,7 +78,7 @@ function installHolmespunSoftware() {
   #
   #  Create a UsrBin link to each file in the OptHps bin directory.
   #
-  local SourceFSpec TargetFSpec SourceFName ExecutableFSpec ExecutableDSpec ExecutableFName
+  local SourceFSpec TargetFSpec SourceFName LinkedFSpec LinkedDSpec LinkedFName
   #
   for SourceFSpec in ./bin/*
   do
@@ -89,7 +89,7 @@ function installHolmespunSoftware() {
     #
     TargetFSpec=${AbsoluteUsrBinDSpec}/${SourceFName}
     #
-    [ -e ${TargetFSpec} ] && rm ${TargetFSpec}
+    rm --force ${TargetFSpec}
     #
     if [ "${SourceFName:0:14}" = "whereHolmespun" ]
     then
@@ -101,17 +101,17 @@ function installHolmespunSoftware() {
        #
     else
        #
-       ExecutableFSpec=${AbsoluteOptHpsDSpec}/bin/$(readlink ${SourceFSpec})
+       LinkedFSpec=$(readlink ${SourceFSpec})
        #
-       ExecutableDSpec=$(cd $(dirname ${ExecutableFSpec}); pwd)
-       ExecutableFName=$(basename ${ExecutableFSpec})
+       LinkedDSpec=$(cd bin/$(dirname ${LinkedFSpec}); pwd)
+       LinkedFName=$(basename ${LinkedFSpec})
        #
-       ln --symbolic ${ExecutableDSpec}/${ExecutableFName} ${TargetFSpec}
+       ln --symbolic ${AbsoluteOptHpsDSpec}/${LinkedDSpec#${PWD}}/${LinkedFName} ${TargetFSpec}
        #
     fi
     #
     spit ${UninstallFSpec} ""
-    spit ${UninstallFSpec} "[ -e ${TargetFSpec} ] && rm ${TargetFSpec}"
+    spit ${UninstallFSpec} "rm --force ${TargetFSpec}"
     #
   done
   #
