@@ -78,19 +78,40 @@ function installHolmespunSoftware() {
   #
   #  Create a UsrBin link to each file in the OptHps bin directory.
   #
-  local SourceFSpec TargetFSpec
+  local SourceFSpec TargetFSpec SourceFName ExecutableFSpec ExecutableDSpec ExecutableFName
   #
-  for SourceFSpec in ${AbsoluteOptHpsDSpec}/bin/*
+  for SourceFSpec in ./bin/*
   do
     #
-    [ ! -e ${SourceFSpec} ] && continue
+    [ ! -L ${SourceFSpec} ] && continue
     #
-    TargetFSpec=${AbsoluteUsrBinDSpec}/$(basename ${SourceFSpec})
+    SourceFName=$(basename ${SourceFSpec})
     #
-    [ ! -L ${TargetFSpec} ] && ln --symbolic ${SourceFSpec} ${TargetFSpec}
+    TargetFSpec=${AbsoluteUsrBinDSpec}/${SourceFName}
+    #
+    [ -e ${TargetFSpec} ] && rm ${TargetFSpec}
+    #
+    if [ "${SourceFName:0:14}" = "whereHolmespun" ]
+    then
+       #
+       spit ${TargetFSpec} "#!/bin/bash"
+       spit ${TargetFSpec} "echo ${AbsoluteOptHpsDSpec}"
+       #
+       chmod 755 ${TargetFSpec}
+       #
+    else
+       #
+       ExecutableFSpec=${AbsoluteOptHpsDSpec}/bin/$(readlink ${SourceFSpec})
+       #
+       ExecutableDSpec=$(cd $(dirname ${ExecutableFSpec}); pwd)
+       ExecutableFName=$(basename ${ExecutableFSpec})
+       #
+       ln --symbolic ${ExecutableDSpec}/${ExecutableFName} ${TargetFSpec}
+       #
+    fi
     #
     spit ${UninstallFSpec} ""
-    spit ${UninstallFSpec} "[ -L ${TargetFSpec} ] && rm ${TargetFSpec}"
+    spit ${UninstallFSpec} "[ -e ${TargetFSpec} ] && rm ${TargetFSpec}"
     #
   done
   #
@@ -99,6 +120,8 @@ function installHolmespunSoftware() {
   spit ${UninstallFSpec} "#  (eof)"
   #
   chmod 755 ${UninstallFSpec}
+  #
+  true
   #
 }
 
