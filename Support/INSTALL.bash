@@ -1,8 +1,8 @@
 #----------------------------------------------------------------------------------------------------------------------
 #
-#  HolmespunLibraryBashing/makefile
+#  HolmespunLibraryBashing/Support/INSTALL.bash
 #
-#	Supports testing and installation of the items in the HolmespunLibraryBashing repository.
+#	Installs items in the HolmespunLibraryBashing repository.
 #
 #  Copyright 2019 Brian G. Holmes
 #
@@ -21,30 +21,49 @@
 #
 #  See the COPYING.text file for further information.
 #
-#  20190907 BGH; created.
+#  20190908 BGH; created.
 #
 #----------------------------------------------------------------------------------------------------------------------
 
-QUIET		?= @
-#QUIET		?= 
+set -u
+set -e
 
-KamajiFSpec	?= $(shell which kamaji)
+export PATH=${PWD}/bin:${PATH}
 
-#----------------------------------------------------------------------------------------------------------------------
-
-.PHONY :	install test
+source $(whereHolmespunLibraryBashing)/Library/installHolmespunSoftware.bash
 
 #----------------------------------------------------------------------------------------------------------------------
 
-test :
-	@echo "make $@"
-	$(QUIET) $(KamajiFSpec) grade
+function INSTALL() {
+  #
+  local -r GivenUsrBinDSpec=${1-/usr/bin}
+  local -r GivenOptHpsDSpec=${2-/opt/holmespun}
+  #
+  #  General installations.
+  #
+  installHolmespunSoftware ${GivenUsrBinDSpec} ${GivenOptHpsDSpec} HolmespunLibraryBashing Library
+  #
+  #  Repo-specific installations.
+  #
+  local -r AbsoluteOptHpsDSpec=$(cd ${GivenOptHpsDSpec}; pwd)/HolmespunLibraryBashing
+  #
+  local -r WhereScriptFSpec=${AbsoluteOptHpsDSpec}/bin/whereHolmespunLibraryBashing
+  #
+  mkdir $(dirname ${WhereScriptFSpec})
+  #
+  spit ${WhereScriptFSpec} "#!/bin/bash"
+  spit ${WhereScriptFSpec} "echo ${GivenOptHpsDSpec}"
+  #
+  chmod 755 ${WhereScriptFSpec}
+  #
+  [ -L ${GivenUsrBinDSpec}/whereHolmespunLibraryBashing ] && rm ${GivenUsrBinDSpec}/whereHolmespunLibraryBashing
+  #
+  ln --symbolic ${WhereScriptFSpec} ${GivenUsrBinDSpec}/whereHolmespunLibraryBashing
+  #
+}
 
 #----------------------------------------------------------------------------------------------------------------------
 
-install :
-	@echo "make $@"
-	$(QUIET) Support/INSTALL.bash
+INSTALL ${*}
 
 #----------------------------------------------------------------------------------------------------------------------
-#  (eof)

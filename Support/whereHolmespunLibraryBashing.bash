@@ -1,12 +1,13 @@
 #!/bin/bash
 #----------------------------------------------------------------------------------------------------------------------
 ###
-###			Bash/whereHolmespunLibraryBashing.bash
+###			Support/whereHolmespunLibraryBashing.bash
 ###
 ###	@file
 ###	@author		Brian G. Holmes
 ###	@copyright	GNU General Public License
-###	@brief		Displays the absolute directory of the HolmespunLibraryBashing repository.
+###	@brief		Displays the absolute directory of the HolmespunLibraryBashing repository or installation
+###			location.
 ###
 #----------------------------------------------------------------------------------------------------------------------
 #
