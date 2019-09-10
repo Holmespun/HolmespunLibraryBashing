@@ -1,3 +1,4 @@
+#!/bin/bash
 #----------------------------------------------------------------------------------------------------------------------
 #
 #  HolmespunLibraryBashing/Support/INSTALL.bash
@@ -30,7 +31,7 @@ set -e
 
 export PATH=${PWD}/bin:${PATH}
 
-source $(whereHolmespunLibraryBashing)/Library/installHolmespunSoftware.bash
+source ./Library/installHolmespunSoftware.bash
 
 #----------------------------------------------------------------------------------------------------------------------
 
