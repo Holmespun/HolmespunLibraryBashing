@@ -1,6 +1,6 @@
 #----------------------------------------------------------------------------------------------------------------------
 ###
-###			Bash/Library/spit_spite_spitn_and_spew.bash
+###			Library/spit_spite_spitn_and_spew.bash
 ###
 ###	@file
 ###	@author		Brian G. Holmes
@@ -12,7 +12,7 @@
 ###
 #----------------------------------------------------------------------------------------------------------------------
 #
-#  Bash/Library/spit_spite_spitn_and_spew.bash
+#  Library/spit_spite_spitn_and_spew.bash
 #
 #	spit  <fspec> <word>...			Uses echo command to append a line of words to the specified file.
 #	spite <fspec> <word>...			Same as spit but with interpretation of escape sequences (e.g. \n).
@@ -20,22 +20,29 @@
 #
 #	spew  <fspec-target> <fspec-source>...	Appends a set of specified source files to a specified target file.
 #
-#  Copyright 2004-2018 Brian G. Holmes
+#----------------------------------------------------------------------------------------------------------------------
 #
-#	This program is free software: you can redistribute it and/or modify it under the terms of the GNU General
-#	Public License as published by the Free Software Foundation, either version 3 of the License, or (at your
-#	option) any later version.
+#  Copyright (c) 2004-2019 Brian G. Holmes
 #
-#	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
-#	implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
-#	for more details.
+#	This program is part of the Holmespun Library Bashing repository.
 #
-#	You should have received a copy of the GNU General Public License along with this program.  If not, see
-#	<https://www.gnu.org/licenses/>.
+#	The Holmespun Library Bashing repository contains free software: you can redistribute it and/or modify it under
+#	the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of
+#	the License, or (at your option) any later version.
+#
+#	The Holmespun Library Bashing repository is distributed in the hope that it will be useful, but WITHOUT ANY
+#	WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#	General Public License for more details.
+#
+#	You should have received a copy of the GNU General Public License along with this file. If not, see
+#       <https://www.gnu.org/licenses/>.
 #
 #  See the COPYING.text file for further information.
 #
+#----------------------------------------------------------------------------------------------------------------------
+#
 #  20180113 BGH; created based on ancient best practices.
+#  20190929 BGH; moved to HLB repo.
 #
 #----------------------------------------------------------------------------------------------------------------------
 ###
@@ -51,7 +58,7 @@ function spew() {
   local FSpec=${1}
   shift 1
   #
-  cat "${*}" >> ${FSpec}
+  cat ${*} >> ${FSpec}
   #
 }
 

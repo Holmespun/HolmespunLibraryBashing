@@ -1,179 +1,93 @@
 # HolmespunLibraryBashing
 
-The HolmespunLibraryBashing repository contains Bash library functions to solve common needs.
+The HolmespunLibraryBashing repository contains Bash library functions and utilities to solve common needs.
+
+## Related Documents
+
+Please refer to these documents for details on what is available in this repository, and how to use it.
+
+* [Library](Documen/Library.md) files and the functions they contain.
+* [Utility](Documen/Utility.md) scripts that may be used as commands.
+
 
 ## Getting Started
 
-The library can be used in repository clone form or it can be installed onto your system:
+The library can be used in repository form or it can be installed onto your system.
 
-```bash
+### Clone
+In either case, you need to clone the repository, and then add its *bin* directory to your $PATH:
+
+``` bash
 	git clone https://github.com/Holmespun/HolmespunLibraryBashing.git
 
 	export PATH=${PWD}/HolmespunLibraryBashing/bin:${PATH}
+```
 
+### Test (Optional)
+
+If you want to run the repository tests then you will also need to clone the
+[HolmespunTestingSupport](https://github.com/Holmespun/HolmespunTestingSupport/) repository.
+Once that repository is available, the tests can be run via the *make* command:
+
+``` bash
 	make test
+```
 
+### Configure (Optional)
+
+The [.bash.conf](.bash.conf) file contains variable and alias definitions for use with this code:
+
+``` bash
+	export PATH=${PWD}/HolmespunLibraryBashing/bin:${PATH}
+
+	source $(whereHolmespunLibraryBashing)/.bash.conf
+```
+
+The *whereHolmespunLibraryBashing* command allows you to avoid hardcoding the repository location.
+The source command above is valid whether or not you have installed the repository.
+
+### Install (Optional)
+
+Installing the repository is equally easy:
+
+``` bash
 	sudo make install
+
+	export PATH=${PATH//HolmespunLibraryBashing/HLB_DISABLED}
 ```
 
-The repository bin directory should be added to your PATH if you plan to use the library in repository form.
-If you install the library then the PATH variable need not be altered.
+You should remove the location of the repository from your $PATH after it has been installed.
 
-A rudimentary makefile is provided: You can use it to test the library code and/or to install the library.
-Tests are run using the kamaji script (not included).
-Kamaji is part of the [HolmespunTestingSupport](https://github.com/Holmespun/HolmespunTestingSupport/) repository.
+After installation, the repository will be represented in the /opt/holmespun directory,
+and each of its utilities will be represented in the /usr/bin directory.
 
-## Using Library Code
+### Uninstall (Optional)
 
-A script that wants to use a library function will first source the file it is stored in.
-To do so properly, the source command should call the *whereHolmespunLibraryBashing* script to locate the library.
-The whereHolmespunLibraryBashing script displays the location of the library.
-
-For example, the following source command may be used to gain access to the echoInColor functions:
-
-```bash
-	source $(whereHolmespunLibraryBashing)/Library/echoInColor.bash
-
-	echoInColorGreen GO
-	echoInColorYellow CAUTION
-	echoInColorRed STOP
-```
-
-## Function Descriptions
-
-Brief descriptions of every function provided.
-
-### echoDatStampedFSpec.bash
-
-#### echoDatStampedFSpec \<prefix\>
-
-Append a Date And Time Stamp to a given Prefix to form a file specification, check to see that the
-file does not exist, and if it does then increase the time portion of it name until a specification is
-achieved that does not exist. Existence checking is only performed if the directory path of the
-Prefix exists.
-
-Example Code:
+An installed repository can be uninstalled using a script that is created during the installation process.
 
 ``` bash
-	for index in 1 2 3; do touch $(echoDatStampedFSpec Walter_Bishop_); done
+	sudo /opt/holmespun/HolmespunTestingSupport/UNINSTALL.bash
 ```
 
-Example Output:
+The UNINSTALL.bash script performs two main functions:
+It renames the directory it which it resides; and
+It removes the /usr/bin files that were created by the install process.
 
-``` bash
-	Walter_Bishop_20190908_113040
-	Walter_Bishop_20190908_113041
-	Walter_Bishop_20190908_113042
-```
+## Copyright
 
-Three files created at roughly the same time (11:30:40) with three unique time stamps.
+Copyright (c) 2019 Brian G. Holmes
 
-### echoInColor.bash
+This program is part of the Holmespun Library Bashing repository.
 
-These functions use escape characters to display text in different colors.
+The Holmespun Library Bashing repository contains free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of
+the License, or (at your option) any later version.
 
-```bash
-	echo "Message Key: $(echoInColorRed Errors), $(echoInColorYellow Warnings), $(echoInColorGreen Swamp Things)." 
-```
+The Holmespun Library Bashing repository is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+General Public License for more details.
 
-#### echoInColorBlue \<text\>
-
-Displays text in blue font.
-
-#### echoInColorGreen \<text\>
-
-Displays text in green font.
-
-#### echoInColorGreenBold \<text\>
-
-Displays text in bold green font.
-
-#### echoInColorRed \<text\>
-
-Displays text in red font.
-
-#### echoInColorRedBold \<text\>
-
-Displays text in bold red font.
-
-#### echoInColorWhite \<text\>
-
-Displays text in white font.
-
-#### echoInColorWhiteBold \<text\>
-
-Displays text in bold white font.
-
-#### echoInColorYellow \<text\>
-
-Displays text in yellow font.
-
-
-### echoRelativePath.bash
-
-#### echoRelativePath \<from-file-specification\> \<to-file-specification\>
-
-The echoRelativePath function within this file displays the relative directory that represents
-the path between \<from-file-specification\> and \<to-file-specification\>; the specifications are
-assumed to be comparable (e.g. both relative or both absolute). Current directory names are
-ignored (i.e ".").  Undone directory names are also ignored (e.g. "name/..").
-
-Example Code:
-
-```bash
-	echoRelativePath ./Working ../../Testing/data.text
-```
-
-Example Output:
-```
-	../../../Testing/data.text
-```
-
-### installHolmespunSoftware.bash
-
-#### installHolmespunSoftware \<usr-bin-dspec\> \<opt-holmespun-dspec\>
-
-Supports installation of the items in the Holmespun repositories.
-
-
-### spit\_spite\_spitn\_and\_spew.bash
-
-The spit, spite, spitn, and spew functions are the useful shortcut functions for text file population using Bash.
-The echo command syntax is cumbersome when redirecting output, especially to one of several files.
-These functions support a more object-oriented view of their functionality.
-
-#### spit \<fspec\> \<word\>...
-
-Uses echo command to append a line of words to the specified file.
-
-#### spite \<fspec\> \<word\>...
-
-Same as spit but with interpretation of escape sequences (e.g. \n).
-
-#### spitn \<fspec\> \<word\>...
-
-Same as spit but without adding an end-line character to the output.
-
-#### spew \<fspec-target\> \<fspec-source\>...
-
-Appends a set of specified source files to a specified target file.
-
-
-## Copyright 2019 Brian G. Holmes
-
-This README file is part of the Holmespun Testing Support repository.
-
-The Holmespun Testing Support repository contains free software:
-you can redistribute it and/or modify it under the terms of the GNU
-General Public License as published by the Free Software Foundation,
-either version 3 of the License, or (at your option) any later version.
-
-The Holmespun Testing Support repository is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-See the GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License along with this program.
+You should have received a copy of the GNU General Public License along with this file.
 If not, see [<https://www.gnu.org/licenses/>](<https://www.gnu.org/licenses/>).
 
 See the [COPYING.text](COPYING.text) file for further licensing information.

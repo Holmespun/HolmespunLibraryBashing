@@ -1,0 +1,128 @@
+# generateMarkdownTocLinksFor_exercise.bash
+
+* [Why Do You Care?](#why-do-you-care)>
+[Philosophy 1: Source code is golden](#philosophy-1-source-code-is-golden)>
+[Discussion](#discussion)
+* [Why Do You Care?](#why-do-you-care)>
+[Philosophy 1: Source code is golden](#philosophy-1-source-code-is-golden)>
+[Supported](#supported)
+* [File Hierarchy](#file-hierarchy)>
+[Detail Directories](#detail-directories)
+* [File Hierarchy](#file-hierarchy)>
+[Working Directories](#working-directories)
+* [Make Targets](#make-targets)>
+[Order Of Operation](#order-of-operation)
+* [Make Targets](#make-targets)>
+[User Makefiles](#user-makefiles)
+* [Make Targets](#make-targets)>
+[Usage Statement](#usage-statement)
+* [Configuration](#configuration)>
+[Mortar Variables](#mortar-variables)>
+[HOLMESPUN_MAKEFILE_SOURCES_DNAME](#holmespun_makefile_sources_dname)
+* [Configuration](#configuration)>
+[Mortar Variables](#mortar-variables)>
+[HOLMESPUN_MAKEFILE_TESTING_DNAME](#holmespun_makefile_testing_dname)
+* [Configuration](#configuration)>
+[Mortar Variables](#mortar-variables)>
+[HOLMESPUN_MAKEFILE_EXERCISE_MARK](#holmespun_makefile_exercise_mark)
+* [Configuration](#configuration)>
+[C++ Purpose and Verbosity](#c-purpose-and-verbosity)>
+[HOLMESPUN_MAKEFILE_PURPOSE](#holmespun_makefile_purpose)
+* [Configuration](#configuration)>
+[C++ Purpose and Verbosity](#c-purpose-and-verbosity)>
+[HOLMESPUN_MAKEFILE_DUMPAGE](#holmespun_makefile_dumpage)
+* [Repository Review](#repository-review)>
+[Bash](#bash)
+* [Repository Review](#repository-review)>
+[Bash/Library](#bash-library)
+* [Repository Review](#repository-review)>
+[Bash/Profile](#bash-profile)
+* [Repository Review](#repository-review)>
+[Bash/Testing](#bash-testing)
+* [Repository Review](#repository-review)>
+[Make](#make)
+* [Repository Review](#repository-review)>
+[Make/Testing](#make-testing)
+* [Repository Review](#repository-review)>
+[bin](#bin)
+* [Overview](#overview)>
+[Demonstrative Output](#demonstrative-output)>
+[Test Case Report](#test-case-report)
+* [Overview](#overview)>
+[Demonstrative Output](#demonstrative-output)>
+[Test Case Definition](#test-case-definition)
+* [Overview](#overview)>
+[clut_case_begin <name>](#clut_case_begin-name)
+* [Overview](#overview)>
+[clut_case_comment <text>](#clut_case_comment-text)
+* [Overview](#overview)>
+[clut_case_end](#clut_case_end)
+* [Overview](#overview)>
+[clut_case_finalize <command>](#clut_case_finalize-command)
+* [Overview](#overview)>
+[clut_case_initialize <command>](#clut_case_initialize-command)
+* [Overview](#overview)>
+[clut_case_parameter <text>](#clut_case_parameter-text)
+* [Overview](#overview)>
+[clut_case_stdin_source <file-name>](#clut_case_stdin_source-file-name)
+* [Overview](#overview)>
+[clut_global_dump_format <extension> <function>](#clut_global_dump_format-extension-function)
+* [Step 1: Create a project directory with a basic makefile.](#step-1-create-a-project-directory-with-a-basic-makefile-)
+* [Step 2: Define a C++ class and compile it.](#step-2-define-a-c-class-and-compile-it-)
+* [Step 3: Define a unit test for our new class.](#step-3-define-a-unit-test-for-our-new-class-)
+* [Step 4: Create a program that uses the new class.](#step-4-create-a-program-that-uses-the-new-class-)
+* [Step 5: Create a Command-Line Utility Test (CLUT) for the new program.](#step-5-create-a-command-line-utility-test-clut-for-the-new-program-)
+* [Step 6: Test-driven development.](#step-6-test-driven-development-)
+* [Copyright 2018 Brian G. Holmes](#copyright-2018-brian-g--holmes)
+
+# HolmespunMakefileMethod
+# Holmespun-Makefile-Method
+## Why Do You Care?
+### Philosophy 1: Source code is golden
+#### Discussion
+#### Supported
+## File Hierarchy
+### Detail Directories
+### Working Directories
+## Make Targets
+### Order Of Operation
+### User Makefiles
+### Usage Statement
+## Configuration
+### Mortar Variables
+#### HOLMESPUN_MAKEFILE_SOURCES_DNAME
+#### HOLMESPUN_MAKEFILE_TESTING_DNAME
+#### HOLMESPUN_MAKEFILE_EXERCISE_MARK
+### C++ Purpose and Verbosity
+#### HOLMESPUN_MAKEFILE_PURPOSE
+#### HOLMESPUN_MAKEFILE_DUMPAGE
+## Repository Review
+### Bash
+### Bash/Library
+### Bash/Profile
+### Bash/Testing
+### Make
+### Make/Testing
+### bin
+# Command-Line Utility Test Framework
+## Overview
+### Demonstrative Output
+#### Test Case Report
+#### Test Case Definition
+### clut_case_begin <name>
+### clut_case_comment <text>
+### clut_case_end
+### clut_case_finalize <command>
+### clut_case_initialize <command>
+### clut_case_parameter <text>
+### clut_case_stdin_source <file-name>
+### clut_global_dump_format <extension> <function>
+## Step 1: Create a project directory with a basic makefile.
+## Step 2: Define a C++ class and compile it.
+## Step 3: Define a unit test for our new class.
+## Step 4: Create a program that uses the new class.
+## Step 5: Create a Command-Line Utility Test (CLUT) for the new program.
+## Step 6: Test-driven development.
+## Copyright 2018 Brian G. Holmes
+
+**(eof)**

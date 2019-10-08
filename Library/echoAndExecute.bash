@@ -1,11 +1,11 @@
 #----------------------------------------------------------------------------------------------------------------------
 ###
-###		Library/echoDatStampedFSpec.bash
+###  Library/echoAndExecute.bash
 ###
 ###  @file
 ###  @author	Brian G. Holmes
 ###  @copyright	GNU General Public License
-###  @brief	Defines a function for naming unique files with date and time stamps.
+###  @brief	Defines a simple (but very useful) function for displaying commands before they are invoked.
 ###
 #----------------------------------------------------------------------------------------------------------------------
 #
@@ -28,52 +28,24 @@
 #
 #----------------------------------------------------------------------------------------------------------------------
 #
-#  20180308 BGH; created.
+#  20180120 BGH; created.
 #  20190929 BGH; moved to HLB repo.
 #
 #----------------------------------------------------------------------------------------------------------------------
 ###
-###  @fn	echoDatStampedFSpec
-###  @param	Prefix	A file specification prefix.
-###  @brief	Generates a unique file specification that includes a date and time stamp.
-###
-###  @details	Append a Date And Time Stamp to a given Prefix to form a file specification, check to see that the
-###		file does not exist, and if it does then increase the time portion of it name until a specification is
-###		achieved that does not exist. Existence checking is only performed if the directory path of the
-###		Prefix exists.
+###  @fn	echoAndExecute
+###  @param	Command	A Linux command.
+###  @brief	Displays and then executes the given command.
 ###
 #----------------------------------------------------------------------------------------------------------------------
 
-function echoDatStampedFSpec() {
+function echoAndExecute() {
   #
-  local -r    Prefix="${*}"
+  local -r Command=${*}
   #
-  local -r    DatePart=$(date '+%Y%m%d')
-  local -r    TimePart=$(date '+%H%M%S')
+  echo "${Command}" | sed --expression="s,${HOME},\$HOME,g"
   #
-  local -r    FormatFSpec="${Prefix}${DatePart}_%06d"
-  #
-  local    -i TimeNumber=$(echo ${TimePart} | sed --expression='s,^0[0]*,,')
-  #
-  local       ResultFSpec=$(printf "${FormatFSpec}" ${TimeNumber})
-  #
-  local -r    PrefixDSpec=$(dirname ${Prefix})
-  #
-  if [ -d ${PrefixDSpec} ]
-  then
-     #
-     while [ -e ${ResultFSpec} ]
-     do
-       #
-       TimeNumber+=1
-       #
-       ResultFSpec=$(printf "${FormatFSpec}" ${TimeNumber})
-       #
-     done
-     #
-  fi
-  #
-  echo "${ResultFSpec}"
+  ${Command}
   #
 }
 

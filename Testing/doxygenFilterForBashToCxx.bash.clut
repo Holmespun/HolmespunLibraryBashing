@@ -1,0 +1,344 @@
+#----------------------------------------------------------------------------------------------------------------------
+#
+#  Testing/doxygenFilterForBashToCxx.bash.clut
+#
+#----------------------------------------------------------------------------------------------------------------------
+#
+#  Copyright (c) 2018-2019 Brian G. Holmes
+#
+#	This program is part of the Holmespun Library Bashing repository.
+#
+#	The Holmespun Library Bashing repository contains free software: you can redistribute it and/or modify it under
+#	the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of
+#	the License, or (at your option) any later version.
+#
+#	The Holmespun Library Bashing repository is distributed in the hope that it will be useful, but WITHOUT ANY
+#	WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#	General Public License for more details.
+#
+#	You should have received a copy of the GNU General Public License along with this file. If not, see
+#       <https://www.gnu.org/licenses/>.
+#
+#  See the COPYING.text file for further information.
+#
+#----------------------------------------------------------------------------------------------------------------------
+#
+#  20180430 BGH; created.
+#
+#----------------------------------------------------------------------------------------------------------------------
+
+set -u
+
+export BashLibraryDSpec=$(whereHolmespunLibraryBashing)/Library
+
+source ${BashLibraryDSpec}/spit_spite_spitn_and_spew.bash
+
+#----------------------------------------------------------------------------------------------------------------------
+
+function defineRequirements() {
+  #
+  clut_global_requirement	DFFB-Input-0010		\
+				'The input Bash script may use the "###" or "##!" symbols for Doxygen special'	\
+				'comments.'
+  #
+  clut_global_requirement	DFFB-Input-0020		\
+				'Doxygen special comments in the input Bash script must be on a line of their own.'
+  #
+  clut_global_requirement	DFFB-Comment-0010	\
+				'The program will translate special comments into lines that start with "///" symbol.'
+  #
+  clut_global_requirement	DFFB-Comment-0020	\
+				'Whitespace in special comment lines will be converted to a single blank,'	\
+				'except for those lines between an "code" and "endcode" directive.'
+  #
+  clut_global_requirement	DFFB-Comment-0030	\
+				'Bash "fn" directives will only translate properly when the simply name the'	\
+				'function that they describe.'
+  #
+  clut_global_requirement	DFFB-Translate-0010	\
+				'Bash "fn" directives will be augmented to include a int8_t return type'	\
+				'(representing a Linux exit status) when translated.'
+  #
+  clut_global_requirement	DFFB-Translate-0020	\
+				'Bash "fn" directives will be augmented to include a list of parameters whose'	\
+				'order and name are based on the "param" directives that follow it.'
+  #
+  clut_global_requirement	DFFB-Translate-0030	\
+				'All function parameters in the translation will have the pseudo-type bash::string.'
+  #
+  clut_global_requirement	DFFB-Translate-0040	\
+				'Special comment blocks that contain an "fn" directive will be given a'		\
+				'"returns" directive during translation that describes the Linux exit status.'
+  #
+  clut_global_requirement	DFFB-Translate-0110	\
+				'Bash functions will be translated to empty C++ functions with class access modifiers.'
+  #
+  clut_global_requirement	DFFB-Translate-0120	\
+				'Bash function translations will be given the same return type and parameter'	\
+				'specification as is expressed in the translated "fn" directive.'
+  #
+  clut_global_requirement	DFFB-Translate-0130	\
+				'Functions with names that begin with an underscore character will be given a'	\
+				'private class access modifier; all others will be given a public modifier.'
+  #
+  clut_global_requirement	DFFB-Translate-0210	\
+				'Bash declare statements will be translated into C++ constant and variable definitions.'
+  #
+  clut_global_requirement	DFFB-Translate-0220	\
+				'Bash declare statements that express the -i option will be translated using'	\
+				'the pseudo-type bash::integer as their base type; all others will use the'	\
+				'pseudo-type bash::string as their base type.'
+  #
+  clut_global_requirement	DFFB-Translate-0230	\
+				'Bash declare statements that express the -r option will be translated into constants.'
+  #
+  clut_global_requirement	DFFB-Translate-0240	\
+				'Bash declare statements that express the -a option will be translated using the'\
+				'pseudo-type bash:array as a container of their base type.'
+  #
+  clut_global_requirement	DFFB-Translate-0250	\
+				'Bash declare statements that express the -A option will be translated using the'\
+				'pseudo-type bash:map as a container of their base type.'
+  #
+  clut_global_requirement	DFFB-Translate-0260	\
+				'Options expressed in Bash declare statements, other than those explicitly called'\
+				'out in these statements, will be ignored.'
+  #
+  clut_global_requirement	DFFB-Translate-0270	\
+				'Values expressed in Bash declare statements (after an equal sign) will be'	\
+				'preserved in the translation, wrapped in a pseudo-type translation, and'	\
+				'quoted if necessary.'
+  #
+  clut_global_requirement	DFFB-Translate-0280	\
+				'Constants and variables with names that begin with an underscore character'	\
+				'will be given a private class access modifier; all others will be given a'	\
+				'public modifier.'
+  #
+  clut_global_requirement	DFFB-Translate-0310	\
+				'Alias statements will be translated to constant definitions with the public'	\
+				'class access modifier and pseudo-type bash::string.'
+  #
+  clut_global_requirement	DFFB-Translate-0410	\
+				'All normal comments and Bash statements that are not explicitly called out'	\
+				'here will be considered insignificant during translation, and will thus be'	\
+				'translated to blank lines, or overwritten by extra information like a'		\
+				'"returns" directive special comment or a class wrapper.'
+  #
+  clut_global_requirement	DFFB-Translate-0420	\
+				'A class wrapper will be added to the translation if the input file contained'	\
+				'any insignificant lines following the special command that contains the'	\
+				'"file" directive, two or more public functions were translated, and one or'	\
+				'more private functions, constants, or variables were translated.'
+  #
+}
+
+#----------------------------------------------------------------------------------------------------------------------
+
+function defineTestCasesOther() {
+  #
+  clut_case_begin		No Parameters Given
+  clut_case_end
+  #
+}
+
+#----------------------------------------------------------------------------------------------------------------------
+
+function create_for_comment_symbols_and_whitespace_correction() {
+  #
+  local -r FSpec=${1}
+  #
+  spit ${FSpec} "#hash insignificant"
+  spit ${FSpec} "## hash-hash insignificant"
+  spit ${FSpec} "#! hash-bang insignificant"
+  spit ${FSpec} "###@file hash-hash-hash-no-space"
+  spit ${FSpec} "### @file hash-hash-hash-one-space"
+  spit ${FSpec} "###      @file       hash-hash-hash-lots-of-space"
+  spit ${FSpec} "Kif insignificant  ### And so it this comment"
+  spit ${FSpec} "##!@file hash-hash-bang-no-space"
+  spit ${FSpec} "##! @file hash-hash-bang-one-space"
+  spit ${FSpec} "##!      @file       hash-hash-bang-lots-of-space"
+  spit ${FSpec} "insignificant Kif  ##! And so it this comment"
+  spit ${FSpec} "#### hash-hash-hash-hash"
+  spit ${FSpec} "##!! hash-hash-bang-bang"
+  spit ${FSpec} "###"
+  spit ${FSpec} "##!"
+  spit ${FSpec} "###@code{.unparsed}"
+  spit ${FSpec} "###	Kif	Is	Meek"
+  spit ${FSpec} "##!				@endcode"
+  #
+}
+
+#----------------------------------------------------------------------------------------------------------------------
+
+function create_for_fn_testing() {
+  #
+  local -r FSpec=${1}
+  #
+  spit ${FSpec} "### @fn GoodComment"
+  spit ${FSpec} "### @param Parameter1 Example parameter."
+  spit ${FSpec} "### @param Parameter2 Example parameter."
+  spit ${FSpec} ""
+  spit ${FSpec} "### @fn __NoRoomForReturnsDirective"
+  spit ${FSpec} "### @param Parameter Example parameter."
+  spit ${FSpec} "### @fn UINT8_T BadComment( STRING Parameter )"
+  spit ${FSpec} "### @param Parameter Example parameter."
+  spit ${FSpec} ""
+  spit ${FSpec} "function GoodComment() {}"
+  spit ${FSpec} "function __NoRoomForReturnsDirective() { Bash statements one the same line }"
+  spit ${FSpec} "function BadComment() {"
+  spit ${FSpec} "  Bash statements on following lines"
+  spit ${FSpec} "}"
+  #
+}
+
+#----------------------------------------------------------------------------------------------------------------------
+
+function create_for_declare_testing() {
+  #
+  local -r FSpec=${1}
+  #
+  spit ${FSpec} "#"
+  spit ${FSpec} "#  A few interesting combinations."
+  spit ${FSpec} "#"
+  spit ${FSpec} "declare -r    StringConstant=\${PATH}"
+  spit ${FSpec} "declare -a -r -i ConstantIntegerArray=(\${#PATH} \${#HOME})"
+  spit ${FSpec} "declare -i -a -A -a _PrivateIntegerAssociativeArray"
+  #
+  local -a ValueArray
+  #
+  ValueArray[0]=""
+  ValueArray[1]="=123"
+  ValueArray[2]="=\"Double quoted value\""
+  ValueArray[3]="='Single quoted value'"
+  ValueArray[4]="=Strung out value"
+  #
+  for ValueIndex in $(seq 0 4)
+  do
+    #
+    spit ${FSpec} "#"
+    spit ${FSpec} "#  All options with a value of ${ValueArray[${ValueIndex}]:1}"
+    spit ${FSpec} "#"
+    #
+    spit ${FSpec} "declare       TextualVariable_Z${ValueArray[${ValueIndex}]}"
+    #
+    for DeclareOption in a A f F g l n r t u x p
+    do
+      #
+      spit ${FSpec} "declare -i -${DeclareOption} NumericVariable_${DeclareOption}${ValueArray[${ValueIndex}]}"
+      spit ${FSpec} "declare    -${DeclareOption} TextualVariable_${DeclareOption}${ValueArray[${ValueIndex}]}"
+      #
+    done
+    #
+  done
+  #
+}
+
+#----------------------------------------------------------------------------------------------------------------------
+
+function create_for_alias_testing() {
+  #
+  local -r FSpec=${1}
+  #
+  spit ${FSpec} "#"
+  spit ${FSpec} "#  Alias definitions."
+  spit ${FSpec} "#"
+  spit ${FSpec} "alias simple=ls"
+  spit ${FSpec} "alias single_quoted='ls -al'"
+  spit ${FSpec} "alias double_quoted=\"find . -name '*.bash'\""
+  spit ${FSpec} "alias -p oops"
+  #
+}
+
+#----------------------------------------------------------------------------------------------------------------------
+
+function create_for_class_wrapper() {
+  #
+  local -r FSpec=${1}
+  #
+  spit ${FSpec} "###"
+  spit ${FSpec} "###  @file"
+  spit ${FSpec} "###"
+  spit ${FSpec} "#  Insignificant line that will be used to begin the class wrapper."
+  spit ${FSpec} ""
+  spit ${FSpec} "declare -A __PrivateVariable"
+  spit ${FSpec} ""
+  spit ${FSpec} "function PublicFunctionOne() {}"
+  spit ${FSpec} "function PublicFunctionTwo() {}"
+  spit ${FSpec} ""
+  spit ${FSpec} "#  Insignificant line that will be used to end the class wrapper."
+  spit ${FSpec} "###  (eof)"
+  #
+}
+
+#----------------------------------------------------------------------------------------------------------------------
+
+function defineTestCasesForRequirements() {
+  #
+  clut_case_begin		Special Comments
+  clut_case_requirement		DFFB-Input-0010 SunnyDay
+  clut_case_requirement		DFFB-Input-0010 RainyDay
+  clut_case_requirement		DFFB-Input-0020 SunnyDay
+  clut_case_requirement		DFFB-Input-0020 RainyDay
+  clut_case_requirement		DFFB-Comment-0010 SunnyDay
+  clut_case_requirement		DFFB-Comment-0020 SunnyDay
+  clut_case_requirement		DFFB-Translate-0410 SunnyDay
+  clut_case_requirement		DFFB-Translate-0420 CloudyDay
+  clut_case_initialize		create_for_comment_symbols_and_whitespace_correction INPUT.bash
+  clut_case_parameter		INPUT.bash
+  clut_case_end
+  #
+  clut_case_begin		Fn Directives
+  clut_case_requirement		DFFB-Comment-0030 SunnyDay
+  clut_case_requirement		DFFB-Comment-0030 RainyDay
+  clut_case_requirement		DFFB-Translate-0010 SunnyDay
+  clut_case_requirement		DFFB-Translate-0020 SunnyDay
+  clut_case_requirement		DFFB-Translate-0030 SunnyDay
+  clut_case_requirement		DFFB-Translate-0040 SunnyDay
+  clut_case_requirement		DFFB-Translate-0040 RainyDay
+  clut_case_requirement		DFFB-Translate-0110 SunnyDay
+  clut_case_requirement		DFFB-Translate-0120 SunnyDay
+  clut_case_requirement		DFFB-Translate-0130 SunnyDay
+  clut_case_requirement		DFFB-Translate-0410 SunnyDay
+  clut_case_requirement		DFFB-Translate-0420 CloudyDay
+  clut_case_initialize		create_for_fn_testing INPUT.bash
+  clut_case_parameter		INPUT.bash
+  clut_case_end
+  #
+  clut_case_begin		Declare Statements
+  clut_case_requirement		DFFB-Translate-0210 SunnyDay
+  clut_case_requirement		DFFB-Translate-0220 SunnyDay
+  clut_case_requirement		DFFB-Translate-0230 SunnyDay
+  clut_case_requirement		DFFB-Translate-0240 SunnyDay
+  clut_case_requirement		DFFB-Translate-0250 SunnyDay
+  clut_case_requirement		DFFB-Translate-0260 SunnyDay
+  clut_case_requirement		DFFB-Translate-0270 SunnyDay
+  clut_case_requirement		DFFB-Translate-0280 SunnyDay
+  clut_case_requirement		DFFB-Translate-0410 SunnyDay
+  clut_case_requirement		DFFB-Translate-0420 CloudyDay
+  clut_case_initialize		create_for_declare_testing INPUT.bash
+  clut_case_parameter		INPUT.bash
+  clut_case_end
+  #
+  clut_case_begin		Alias Statements
+  clut_case_requirement		DFFB-Translate-0310 SunnyDay
+  clut_case_requirement		DFFB-Translate-0410 SunnyDay
+  clut_case_requirement		DFFB-Translate-0420 CloudyDay
+  clut_case_initialize		create_for_alias_testing INPUT.bash
+  clut_case_parameter		INPUT.bash
+  clut_case_end
+  #
+  clut_case_begin		Class Wrapper
+  clut_case_requirement		DFFB-Translate-0420 SunnyDay
+  clut_case_initialize		create_for_class_wrapper INPUT.bash
+  clut_case_parameter		INPUT.bash
+  clut_case_end
+  #
+}
+
+#----------------------------------------------------------------------------------------------------------------------
+
+clut_definition_set		defineRequirements
+clut_definition_set		defineTestCasesOther
+clut_definition_set		defineTestCasesForRequirements
+
+#----------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,622 @@
+CLUT Output Begins...
+CLUT Output Format Version: 5.5
+CLUT Source File: doxygenFilterForBashToCxx.bash.clut (6 cases)
+
+0. Global Information
+0.1. Notations
+    |No notations defined.
+0.2. Requirement Statements
+0.2.1. DFFB-Input-0010
+    |The input Bash script may use the ### or ##! symbols for Doxygen special comments.
+0.2.2. DFFB-Input-0020
+    |Doxygen special comments in the input Bash script must be on a line of their own.
+0.2.3. DFFB-Comment-0010
+    |The program will translate special comments into lines that start with /// symbol.
+0.2.4. DFFB-Comment-0020
+    |Whitespace in special comment lines will be converted to a single blank, except for those lines between an code
+    |and endcode directive.
+0.2.5. DFFB-Comment-0030
+    |Bash fn directives will only translate properly when the simply name the function that they describe.
+0.2.6. DFFB-Translate-0010
+    |Bash fn directives will be augmented to include a int8_t return type (representing a Linux exit status) when
+    |translated.
+0.2.7. DFFB-Translate-0020
+    |Bash fn directives will be augmented to include a list of parameters whose order and name are based on the param
+    |directives that follow it.
+0.2.8. DFFB-Translate-0030
+    |All function parameters in the translation will have the pseudo-type bash::string.
+0.2.9. DFFB-Translate-0040
+    |Special comment blocks that contain an fn directive will be given a returns directive during translation that
+    |describes the Linux exit status.
+0.2.10. DFFB-Translate-0110
+    |Bash functions will be translated to empty C++ functions with class access modifiers.
+0.2.11. DFFB-Translate-0120
+    |Bash function translations will be given the same return type and parameter specification as is expressed in the
+    |translated fn directive.
+0.2.12. DFFB-Translate-0130
+    |Functions with names that begin with an underscore character will be given a private class access modifier; all
+    |others will be given a public modifier.
+0.2.13. DFFB-Translate-0210
+    |Bash declare statements will be translated into C++ constant and variable definitions.
+0.2.14. DFFB-Translate-0220
+    |Bash declare statements that express the -i option will be translated using the pseudo-type bash::integer as
+    |their base type; all others will use the pseudo-type bash::string as their base type.
+0.2.15. DFFB-Translate-0230
+    |Bash declare statements that express the -r option will be translated into constants.
+0.2.16. DFFB-Translate-0240
+    |Bash declare statements that express the -a option will be translated using the pseudo-type bash:array as a
+    |container of their base type.
+0.2.17. DFFB-Translate-0250
+    |Bash declare statements that express the -A option will be translated using the pseudo-type bash:map as a
+    |container of their base type.
+0.2.18. DFFB-Translate-0260
+    |Options expressed in Bash declare statements, other than those explicitly called out in these statements, will be
+    |ignored.
+0.2.19. DFFB-Translate-0270
+    |Values expressed in Bash declare statements (after an equal sign) will be preserved in the translation, wrapped
+    |in a pseudo-type translation, and quoted if necessary.
+0.2.20. DFFB-Translate-0280
+    |Constants and variables with names that begin with an underscore character will be given a private class access
+    |modifier; all others will be given a public modifier.
+0.2.21. DFFB-Translate-0310
+    |Alias statements will be translated to constant definitions with the public class access modifier and pseudo-type
+    |bash::string.
+0.2.22. DFFB-Translate-0410
+    |All normal comments and Bash statements that are not explicitly called out here will be considered insignificant
+    |during translation, and will thus be translated to blank lines, or overwritten by extra information like a
+    |returns directive special comment or a class wrapper.
+0.2.23. DFFB-Translate-0420
+    |A class wrapper will be added to the translation if the input file contained any insignificant lines following
+    |the special command that contains the file directive, two or more public functions were translated, and one or
+    |more private functions, constants, or variables were translated.
+0.3. Requirement Coverage
+0.3.1. DFFB-Input-0010
+0.3.1.1. Special Comments: SunnyDay
+0.3.1.2. Special Comments: RainyDay
+0.3.2. DFFB-Input-0020
+0.3.2.1. Special Comments: SunnyDay
+0.3.2.2. Special Comments: RainyDay
+0.3.3. DFFB-Comment-0010
+0.3.3.1. Special Comments: SunnyDay
+0.3.4. DFFB-Comment-0020
+0.3.4.1. Special Comments: SunnyDay
+0.3.5. DFFB-Comment-0030
+0.3.5.1. Fn Directives: SunnyDay
+0.3.5.2. Fn Directives: RainyDay
+0.3.6. DFFB-Translate-0010
+0.3.6.1. Fn Directives: SunnyDay
+0.3.7. DFFB-Translate-0020
+0.3.7.1. Fn Directives: SunnyDay
+0.3.8. DFFB-Translate-0030
+0.3.8.1. Fn Directives: SunnyDay
+0.3.9. DFFB-Translate-0040
+0.3.9.1. Fn Directives: SunnyDay
+0.3.9.2. Fn Directives: RainyDay
+0.3.10. DFFB-Translate-0110
+0.3.10.1. Fn Directives: SunnyDay
+0.3.11. DFFB-Translate-0120
+0.3.11.1. Fn Directives: SunnyDay
+0.3.12. DFFB-Translate-0130
+0.3.12.1. Fn Directives: SunnyDay
+0.3.13. DFFB-Translate-0210
+0.3.13.1. Declare Statements: SunnyDay
+0.3.14. DFFB-Translate-0220
+0.3.14.1. Declare Statements: SunnyDay
+0.3.15. DFFB-Translate-0230
+0.3.15.1. Declare Statements: SunnyDay
+0.3.16. DFFB-Translate-0240
+0.3.16.1. Declare Statements: SunnyDay
+0.3.17. DFFB-Translate-0250
+0.3.17.1. Declare Statements: SunnyDay
+0.3.18. DFFB-Translate-0260
+0.3.18.1. Declare Statements: SunnyDay
+0.3.19. DFFB-Translate-0270
+0.3.19.1. Declare Statements: SunnyDay
+0.3.20. DFFB-Translate-0280
+0.3.20.1. Declare Statements: SunnyDay
+0.3.21. DFFB-Translate-0310
+0.3.21.1. Alias Statements: SunnyDay
+0.3.22. DFFB-Translate-0410
+0.3.22.1. Special Comments: SunnyDay
+0.3.22.2. Fn Directives: SunnyDay
+0.3.22.3. Declare Statements: SunnyDay
+0.3.22.4. Alias Statements: SunnyDay
+0.3.23. DFFB-Translate-0420
+0.3.23.1. Special Comments: CloudyDay
+0.3.23.2. Fn Directives: CloudyDay
+0.3.23.3. Declare Statements: CloudyDay
+0.3.23.4. Alias Statements: CloudyDay
+0.3.23.5. Class Wrapper: SunnyDay
+0.4. Comparable Masks
+    |No masks defined.
+
+1. No Parameters Given.
+1.1. Requirements.
+    |None.
+1.2. Initializations.
+1.3. Initial Workspace is empty.
+1.4. Target CLU Call.
+1.4.1.  doxygenFilterForBashToCxx.bash
+1.5. Finalizations.
+1.6. Workspace Impact...
+1.6.1. The initial and final workspace contents are equivalent.
+
+2. Special Comments.
+2.1. Requirements.
+    |DFFB-Input-0010 SunnyDay; DFFB-Input-0010 RainyDay; DFFB-Input-0020 SunnyDay; DFFB-Input-0020 RainyDay;
+    |DFFB-Comment-0010 SunnyDay; DFFB-Comment-0020 SunnyDay; DFFB-Translate-0410 SunnyDay; DFFB-Translate-0420
+    |CloudyDay
+2.2. Initializations.
+2.2.1. create_for_comment_symbols_and_whitespace_correction INPUT.bash
+2.3. Initial Workspace contains one file...
+    |INPUT.bash
+2.3.1. INPUT.bash...
+    |#hash insignificant
+    |## hash-hash insignificant
+    |#! hash-bang insignificant
+    |###@file hash-hash-hash-no-space
+    |### @file hash-hash-hash-one-space
+    |###      @file       hash-hash-hash-lots-of-space
+    |Kif insignificant  ### And so it this comment
+    |##!@file hash-hash-bang-no-space
+    |##! @file hash-hash-bang-one-space
+    |##!      @file       hash-hash-bang-lots-of-space
+    |insignificant Kif  ##! And so it this comment
+    |#### hash-hash-hash-hash
+    |##!! hash-hash-bang-bang
+    |###
+    |##!
+    |###@code{.unparsed}
+    |###	Kif	Is	Meek
+    |##!				@endcode
+2.4. Target CLU Call.
+2.4.1.  doxygenFilterForBashToCxx.bash INPUT.bash
+2.4.1.1. STDOUT [text]...
+    |
+    |
+    |
+    |/// @file hash-hash-hash-no-space
+    |/// @file hash-hash-hash-one-space
+    |/// @file hash-hash-hash-lots-of-space
+    |
+    |/// @file hash-hash-bang-no-space
+    |/// @file hash-hash-bang-one-space
+    |/// @file hash-hash-bang-lots-of-space
+    |
+    |/// # hash-hash-hash-hash
+    |/// ! hash-hash-bang-bang
+    |/// 
+    |/// 
+    |/// @code{.unparsed}
+    |/// 	Kif	Is	Meek
+    |/// @endcode
+2.5. Finalizations.
+2.6. Workspace Impact...
+2.6.1. The initial and final workspace contents are equivalent.
+
+3. Fn Directives.
+3.1. Requirements.
+    |DFFB-Comment-0030 SunnyDay; DFFB-Comment-0030 RainyDay; DFFB-Translate-0010 SunnyDay; DFFB-Translate-0020
+    |SunnyDay; DFFB-Translate-0030 SunnyDay; DFFB-Translate-0040 SunnyDay; DFFB-Translate-0040 RainyDay;
+    |DFFB-Translate-0110 SunnyDay; DFFB-Translate-0120 SunnyDay; DFFB-Translate-0130 SunnyDay; DFFB-Translate-0410
+    |SunnyDay; DFFB-Translate-0420 CloudyDay
+3.2. Initializations.
+3.2.1. create_for_fn_testing INPUT.bash
+3.3. Initial Workspace contains one file...
+    |INPUT.bash
+3.3.1. INPUT.bash...
+    |### @fn GoodComment
+    |### @param Parameter1 Example parameter.
+    |### @param Parameter2 Example parameter.
+    |
+    |### @fn __NoRoomForReturnsDirective
+    |### @param Parameter Example parameter.
+    |### @fn UINT8_T BadComment( STRING Parameter )
+    |### @param Parameter Example parameter.
+    |
+    |function GoodComment() {}
+    |function __NoRoomForReturnsDirective() { Bash statements one the same line }
+    |function BadComment() {
+    |  Bash statements on following lines
+    |}
+3.4. Target CLU Call.
+3.4.1.  doxygenFilterForBashToCxx.bash INPUT.bash
+3.4.1.1. STDOUT [text]...
+    |/// @returns A Linux exit status value (uint8_t in the range 0..255).
+    |/// @param Parameter1 Example HMM::PARAMeter.
+    |/// @param Parameter2 Example HMM::PARAMeter.
+    |/// @returns A Linux exit status value (uint8_t in the range 0..255).
+    |/// @fn int8_t __NoRoomForReturnsDirective( bash::string Parameter )
+    |/// @param Parameter Example HMM::PARAMeter.
+    |/// @fn int8_t UINT8_T
+    |/// @param Parameter Example HMM::PARAMeter.
+    |
+    |public: int8_t GoodComment( bash::string Parameter1, bash::string Parameter2 ) {}
+    |private: int8_t __NoRoomForReturnsDirective( bash::string Parameter ) {       }
+    |public: int8_t BadComment() {
+    |
+    |}
+3.5. Finalizations.
+3.6. Workspace Impact...
+3.6.1. The initial and final workspace contents are equivalent.
+
+4. Declare Statements.
+4.1. Requirements.
+    |DFFB-Translate-0210 SunnyDay; DFFB-Translate-0220 SunnyDay; DFFB-Translate-0230 SunnyDay; DFFB-Translate-0240
+    |SunnyDay; DFFB-Translate-0250 SunnyDay; DFFB-Translate-0260 SunnyDay; DFFB-Translate-0270 SunnyDay;
+    |DFFB-Translate-0280 SunnyDay; DFFB-Translate-0410 SunnyDay; DFFB-Translate-0420 CloudyDay
+4.2. Initializations.
+4.2.1. create_for_declare_testing INPUT.bash
+4.3. Initial Workspace contains one file...
+    |INPUT.bash
+4.3.1. INPUT.bash...
+    |#
+    |#  A few interesting combinations.
+    |#
+    |declare -r    StringConstant=${PATH}
+    |declare -a -r -i ConstantIntegerArray=(${#PATH} ${#HOME})
+    |declare -i -a -A -a _PrivateIntegerAssociativeArray
+    |#
+    |#  All options with a value of 
+    |#
+    |declare       TextualVariable_Z
+    |declare -i -a NumericVariable_a
+    |declare    -a TextualVariable_a
+    |declare -i -A NumericVariable_A
+    |declare    -A TextualVariable_A
+    |declare -i -f NumericVariable_f
+    |declare    -f TextualVariable_f
+    |declare -i -F NumericVariable_F
+    |declare    -F TextualVariable_F
+    |declare -i -g NumericVariable_g
+    |declare    -g TextualVariable_g
+    |declare -i -l NumericVariable_l
+    |declare    -l TextualVariable_l
+    |declare -i -n NumericVariable_n
+    |declare    -n TextualVariable_n
+    |declare -i -r NumericVariable_r
+    |declare    -r TextualVariable_r
+    |declare -i -t NumericVariable_t
+    |declare    -t TextualVariable_t
+    |declare -i -u NumericVariable_u
+    |declare    -u TextualVariable_u
+    |declare -i -x NumericVariable_x
+    |declare    -x TextualVariable_x
+    |declare -i -p NumericVariable_p
+    |declare    -p TextualVariable_p
+    |#
+    |#  All options with a value of 123
+    |#
+    |declare       TextualVariable_Z=123
+    |declare -i -a NumericVariable_a=123
+    |declare    -a TextualVariable_a=123
+    |declare -i -A NumericVariable_A=123
+    |declare    -A TextualVariable_A=123
+    |declare -i -f NumericVariable_f=123
+    |declare    -f TextualVariable_f=123
+    |declare -i -F NumericVariable_F=123
+    |declare    -F TextualVariable_F=123
+    |declare -i -g NumericVariable_g=123
+    |declare    -g TextualVariable_g=123
+    |declare -i -l NumericVariable_l=123
+    |declare    -l TextualVariable_l=123
+    |declare -i -n NumericVariable_n=123
+    |declare    -n TextualVariable_n=123
+    |declare -i -r NumericVariable_r=123
+    |declare    -r TextualVariable_r=123
+    |declare -i -t NumericVariable_t=123
+    |declare    -t TextualVariable_t=123
+    |declare -i -u NumericVariable_u=123
+    |declare    -u TextualVariable_u=123
+    |declare -i -x NumericVariable_x=123
+    |declare    -x TextualVariable_x=123
+    |declare -i -p NumericVariable_p=123
+    |declare    -p TextualVariable_p=123
+    |#
+    |#  All options with a value of "Double quoted value"
+    |#
+    |declare       TextualVariable_Z="Double quoted value"
+    |declare -i -a NumericVariable_a="Double quoted value"
+    |declare    -a TextualVariable_a="Double quoted value"
+    |declare -i -A NumericVariable_A="Double quoted value"
+    |declare    -A TextualVariable_A="Double quoted value"
+    |declare -i -f NumericVariable_f="Double quoted value"
+    |declare    -f TextualVariable_f="Double quoted value"
+    |declare -i -F NumericVariable_F="Double quoted value"
+    |declare    -F TextualVariable_F="Double quoted value"
+    |declare -i -g NumericVariable_g="Double quoted value"
+    |declare    -g TextualVariable_g="Double quoted value"
+    |declare -i -l NumericVariable_l="Double quoted value"
+    |declare    -l TextualVariable_l="Double quoted value"
+    |declare -i -n NumericVariable_n="Double quoted value"
+    |declare    -n TextualVariable_n="Double quoted value"
+    |declare -i -r NumericVariable_r="Double quoted value"
+    |declare    -r TextualVariable_r="Double quoted value"
+    |declare -i -t NumericVariable_t="Double quoted value"
+    |declare    -t TextualVariable_t="Double quoted value"
+    |declare -i -u NumericVariable_u="Double quoted value"
+    |declare    -u TextualVariable_u="Double quoted value"
+    |declare -i -x NumericVariable_x="Double quoted value"
+    |declare    -x TextualVariable_x="Double quoted value"
+    |declare -i -p NumericVariable_p="Double quoted value"
+    |declare    -p TextualVariable_p="Double quoted value"
+    |#
+    |#  All options with a value of 'Single quoted value'
+    |#
+    |declare       TextualVariable_Z='Single quoted value'
+    |declare -i -a NumericVariable_a='Single quoted value'
+    |declare    -a TextualVariable_a='Single quoted value'
+    |declare -i -A NumericVariable_A='Single quoted value'
+    |declare    -A TextualVariable_A='Single quoted value'
+    |declare -i -f NumericVariable_f='Single quoted value'
+    |declare    -f TextualVariable_f='Single quoted value'
+    |declare -i -F NumericVariable_F='Single quoted value'
+    |declare    -F TextualVariable_F='Single quoted value'
+    |declare -i -g NumericVariable_g='Single quoted value'
+    |declare    -g TextualVariable_g='Single quoted value'
+    |declare -i -l NumericVariable_l='Single quoted value'
+    |declare    -l TextualVariable_l='Single quoted value'
+    |declare -i -n NumericVariable_n='Single quoted value'
+    |declare    -n TextualVariable_n='Single quoted value'
+    |declare -i -r NumericVariable_r='Single quoted value'
+    |declare    -r TextualVariable_r='Single quoted value'
+    |declare -i -t NumericVariable_t='Single quoted value'
+    |declare    -t TextualVariable_t='Single quoted value'
+    |declare -i -u NumericVariable_u='Single quoted value'
+    |declare    -u TextualVariable_u='Single quoted value'
+    |declare -i -x NumericVariable_x='Single quoted value'
+    |declare    -x TextualVariable_x='Single quoted value'
+    |declare -i -p NumericVariable_p='Single quoted value'
+    |declare    -p TextualVariable_p='Single quoted value'
+    |#
+    |#  All options with a value of Strung out value
+    |#
+    |declare       TextualVariable_Z=Strung out value
+    |declare -i -a NumericVariable_a=Strung out value
+    |declare    -a TextualVariable_a=Strung out value
+    |declare -i -A NumericVariable_A=Strung out value
+    |declare    -A TextualVariable_A=Strung out value
+    |declare -i -f NumericVariable_f=Strung out value
+    |declare    -f TextualVariable_f=Strung out value
+    |declare -i -F NumericVariable_F=Strung out value
+    |declare    -F TextualVariable_F=Strung out value
+    |declare -i -g NumericVariable_g=Strung out value
+    |declare    -g TextualVariable_g=Strung out value
+    |declare -i -l NumericVariable_l=Strung out value
+    |declare    -l TextualVariable_l=Strung out value
+    |declare -i -n NumericVariable_n=Strung out value
+    |declare    -n TextualVariable_n=Strung out value
+    |declare -i -r NumericVariable_r=Strung out value
+    |declare    -r TextualVariable_r=Strung out value
+    |declare -i -t NumericVariable_t=Strung out value
+    |declare    -t TextualVariable_t=Strung out value
+    |declare -i -u NumericVariable_u=Strung out value
+    |declare    -u TextualVariable_u=Strung out value
+    |declare -i -x NumericVariable_x=Strung out value
+    |declare    -x TextualVariable_x=Strung out value
+    |declare -i -p NumericVariable_p=Strung out value
+    |declare    -p TextualVariable_p=Strung out value
+4.4. Target CLU Call.
+4.4.1.  doxygenFilterForBashToCxx.bash INPUT.bash
+4.4.1.1. STDOUT [text]...
+    |
+    |
+    |
+    |public: const bash::string StringConstant = bash::string( "${PATH}" );
+    |public: const bash::array< const bash::integer > ConstantIntegerArray = bash::array<bash::integer>(${#PATH} ${#HOME});
+    |private: bash::map< bash::integer > _PrivateIntegerAssociativeArray;
+    |
+    |
+    |
+    |public: bash::string TextualVariable_Z;
+    |public: bash::array< bash::integer > NumericVariable_a;
+    |public: bash::array< bash::string > TextualVariable_a;
+    |public: bash::map< bash::integer > NumericVariable_A;
+    |public: bash::map< bash::string > TextualVariable_A;
+    |public: bash::integer NumericVariable_f;
+    |public: bash::string TextualVariable_f;
+    |public: bash::integer NumericVariable_F;
+    |public: bash::string TextualVariable_F;
+    |public: bash::integer NumericVariable_g;
+    |public: bash::string TextualVariable_g;
+    |public: bash::integer NumericVariable_l;
+    |public: bash::string TextualVariable_l;
+    |public: bash::integer NumericVariable_n;
+    |public: bash::string TextualVariable_n;
+    |public: const bash::integer NumericVariable_r;
+    |public: const bash::string TextualVariable_r;
+    |public: bash::integer NumericVariable_t;
+    |public: bash::string TextualVariable_t;
+    |public: bash::integer NumericVariable_u;
+    |public: bash::string TextualVariable_u;
+    |public: bash::integer NumericVariable_x;
+    |public: bash::string TextualVariable_x;
+    |public: bash::integer NumericVariable_p;
+    |public: bash::string TextualVariable_p;
+    |
+    |
+    |
+    |public: bash::string TextualVariable_Z = bash::string( "123" );
+    |public: bash::array< bash::integer > NumericVariable_a = bash::array<bash::integer>( 123 );
+    |public: bash::array< bash::string > TextualVariable_a = bash::array<bash::string>( "123" );
+    |public: bash::map< bash::integer > NumericVariable_A = bash::map<bash::integer>( 123 );
+    |public: bash::map< bash::string > TextualVariable_A = bash::map<bash::string>( "123" );
+    |public: bash::integer NumericVariable_f = bash::integer( 123 );
+    |public: bash::string TextualVariable_f = bash::string( "123" );
+    |public: bash::integer NumericVariable_F = bash::integer( 123 );
+    |public: bash::string TextualVariable_F = bash::string( "123" );
+    |public: bash::integer NumericVariable_g = bash::integer( 123 );
+    |public: bash::string TextualVariable_g = bash::string( "123" );
+    |public: bash::integer NumericVariable_l = bash::integer( 123 );
+    |public: bash::string TextualVariable_l = bash::string( "123" );
+    |public: bash::integer NumericVariable_n = bash::integer( 123 );
+    |public: bash::string TextualVariable_n = bash::string( "123" );
+    |public: const bash::integer NumericVariable_r = bash::integer( 123 );
+    |public: const bash::string TextualVariable_r = bash::string( "123" );
+    |public: bash::integer NumericVariable_t = bash::integer( 123 );
+    |public: bash::string TextualVariable_t = bash::string( "123" );
+    |public: bash::integer NumericVariable_u = bash::integer( 123 );
+    |public: bash::string TextualVariable_u = bash::string( "123" );
+    |public: bash::integer NumericVariable_x = bash::integer( 123 );
+    |public: bash::string TextualVariable_x = bash::string( "123" );
+    |public: bash::integer NumericVariable_p = bash::integer( 123 );
+    |public: bash::string TextualVariable_p = bash::string( "123" );
+    |
+    |
+    |
+    |public: bash::string TextualVariable_Z = bash::string( "Double quoted value" );
+    |public: bash::array< bash::integer > NumericVariable_a = bash::array<bash::integer>( "Double quoted value" );
+    |public: bash::array< bash::string > TextualVariable_a = bash::array<bash::string>( "Double quoted value" );
+    |public: bash::map< bash::integer > NumericVariable_A = bash::map<bash::integer>( "Double quoted value" );
+    |public: bash::map< bash::string > TextualVariable_A = bash::map<bash::string>( "Double quoted value" );
+    |public: bash::integer NumericVariable_f = bash::integer( "Double quoted value" );
+    |public: bash::string TextualVariable_f = bash::string( "Double quoted value" );
+    |public: bash::integer NumericVariable_F = bash::integer( "Double quoted value" );
+    |public: bash::string TextualVariable_F = bash::string( "Double quoted value" );
+    |public: bash::integer NumericVariable_g = bash::integer( "Double quoted value" );
+    |public: bash::string TextualVariable_g = bash::string( "Double quoted value" );
+    |public: bash::integer NumericVariable_l = bash::integer( "Double quoted value" );
+    |public: bash::string TextualVariable_l = bash::string( "Double quoted value" );
+    |public: bash::integer NumericVariable_n = bash::integer( "Double quoted value" );
+    |public: bash::string TextualVariable_n = bash::string( "Double quoted value" );
+    |public: const bash::integer NumericVariable_r = bash::integer( "Double quoted value" );
+    |public: const bash::string TextualVariable_r = bash::string( "Double quoted value" );
+    |public: bash::integer NumericVariable_t = bash::integer( "Double quoted value" );
+    |public: bash::string TextualVariable_t = bash::string( "Double quoted value" );
+    |public: bash::integer NumericVariable_u = bash::integer( "Double quoted value" );
+    |public: bash::string TextualVariable_u = bash::string( "Double quoted value" );
+    |public: bash::integer NumericVariable_x = bash::integer( "Double quoted value" );
+    |public: bash::string TextualVariable_x = bash::string( "Double quoted value" );
+    |public: bash::integer NumericVariable_p = bash::integer( "Double quoted value" );
+    |public: bash::string TextualVariable_p = bash::string( "Double quoted value" );
+    |
+    |
+    |
+    |public: bash::string TextualVariable_Z = bash::string( "Single quoted value" );
+    |public: bash::array< bash::integer > NumericVariable_a = bash::array<bash::integer>( "Single quoted value" );
+    |public: bash::array< bash::string > TextualVariable_a = bash::array<bash::string>( "Single quoted value" );
+    |public: bash::map< bash::integer > NumericVariable_A = bash::map<bash::integer>( "Single quoted value" );
+    |public: bash::map< bash::string > TextualVariable_A = bash::map<bash::string>( "Single quoted value" );
+    |public: bash::integer NumericVariable_f = bash::integer( "Single quoted value" );
+    |public: bash::string TextualVariable_f = bash::string( "Single quoted value" );
+    |public: bash::integer NumericVariable_F = bash::integer( "Single quoted value" );
+    |public: bash::string TextualVariable_F = bash::string( "Single quoted value" );
+    |public: bash::integer NumericVariable_g = bash::integer( "Single quoted value" );
+    |public: bash::string TextualVariable_g = bash::string( "Single quoted value" );
+    |public: bash::integer NumericVariable_l = bash::integer( "Single quoted value" );
+    |public: bash::string TextualVariable_l = bash::string( "Single quoted value" );
+    |public: bash::integer NumericVariable_n = bash::integer( "Single quoted value" );
+    |public: bash::string TextualVariable_n = bash::string( "Single quoted value" );
+    |public: const bash::integer NumericVariable_r = bash::integer( "Single quoted value" );
+    |public: const bash::string TextualVariable_r = bash::string( "Single quoted value" );
+    |public: bash::integer NumericVariable_t = bash::integer( "Single quoted value" );
+    |public: bash::string TextualVariable_t = bash::string( "Single quoted value" );
+    |public: bash::integer NumericVariable_u = bash::integer( "Single quoted value" );
+    |public: bash::string TextualVariable_u = bash::string( "Single quoted value" );
+    |public: bash::integer NumericVariable_x = bash::integer( "Single quoted value" );
+    |public: bash::string TextualVariable_x = bash::string( "Single quoted value" );
+    |public: bash::integer NumericVariable_p = bash::integer( "Single quoted value" );
+    |public: bash::string TextualVariable_p = bash::string( "Single quoted value" );
+    |
+    |
+    |
+    |public: bash::string TextualVariable_Z = bash::string( "Strung out value" );
+    |public: bash::array< bash::integer > NumericVariable_a = bash::array<bash::integer>( Strung out value );
+    |public: bash::array< bash::string > TextualVariable_a = bash::array<bash::string>( "Strung out value" );
+    |public: bash::map< bash::integer > NumericVariable_A = bash::map<bash::integer>( Strung out value );
+    |public: bash::map< bash::string > TextualVariable_A = bash::map<bash::string>( "Strung out value" );
+    |public: bash::integer NumericVariable_f = bash::integer( Strung out value );
+    |public: bash::string TextualVariable_f = bash::string( "Strung out value" );
+    |public: bash::integer NumericVariable_F = bash::integer( Strung out value );
+    |public: bash::string TextualVariable_F = bash::string( "Strung out value" );
+    |public: bash::integer NumericVariable_g = bash::integer( Strung out value );
+    |public: bash::string TextualVariable_g = bash::string( "Strung out value" );
+    |public: bash::integer NumericVariable_l = bash::integer( Strung out value );
+    |public: bash::string TextualVariable_l = bash::string( "Strung out value" );
+    |public: bash::integer NumericVariable_n = bash::integer( Strung out value );
+    |public: bash::string TextualVariable_n = bash::string( "Strung out value" );
+    |public: const bash::integer NumericVariable_r = bash::integer( Strung out value );
+    |public: const bash::string TextualVariable_r = bash::string( "Strung out value" );
+    |public: bash::integer NumericVariable_t = bash::integer( Strung out value );
+    |public: bash::string TextualVariable_t = bash::string( "Strung out value" );
+    |public: bash::integer NumericVariable_u = bash::integer( Strung out value );
+    |public: bash::string TextualVariable_u = bash::string( "Strung out value" );
+    |public: bash::integer NumericVariable_x = bash::integer( Strung out value );
+    |public: bash::string TextualVariable_x = bash::string( "Strung out value" );
+    |public: bash::integer NumericVariable_p = bash::integer( Strung out value );
+    |public: bash::string TextualVariable_p = bash::string( "Strung out value" );
+4.5. Finalizations.
+4.6. Workspace Impact...
+4.6.1. The initial and final workspace contents are equivalent.
+
+5. Alias Statements.
+5.1. Requirements.
+    |DFFB-Translate-0310 SunnyDay; DFFB-Translate-0410 SunnyDay; DFFB-Translate-0420 CloudyDay
+5.2. Initializations.
+5.2.1. create_for_alias_testing INPUT.bash
+5.3. Initial Workspace contains one file...
+    |INPUT.bash
+5.3.1. INPUT.bash...
+    |#
+    |#  Alias definitions.
+    |#
+    |alias simple=ls
+    |alias single_quoted='ls -al'
+    |alias double_quoted="find . -name '*.bash'"
+    |alias -p oops
+5.4. Target CLU Call.
+5.4.1.  doxygenFilterForBashToCxx.bash INPUT.bash
+5.4.1.1. STDOUT [text]...
+    |
+    |
+    |
+    |public: const bash::string simple = "ls";
+    |public: const bash::string single_quoted = "ls -al"; 
+    |public: const bash::string double_quoted = "find . -name '*.bash'";   
+    |public: const bash::string -p = "-p oops"; 
+5.5. Finalizations.
+5.6. Workspace Impact...
+5.6.1. The initial and final workspace contents are equivalent.
+
+6. Class Wrapper.
+6.1. Requirements.
+    |DFFB-Translate-0420 SunnyDay
+6.2. Initializations.
+6.2.1. create_for_class_wrapper INPUT.bash
+6.3. Initial Workspace contains one file...
+    |INPUT.bash
+6.3.1. INPUT.bash...
+    |###
+    |###  @file
+    |###
+    |#  Insignificant line that will be used to begin the class wrapper.
+    |
+    |declare -A __PrivateVariable
+    |
+    |function PublicFunctionOne() {}
+    |function PublicFunctionTwo() {}
+    |
+    |#  Insignificant line that will be used to end the class wrapper.
+    |###  (eof)
+6.4. Target CLU Call.
+6.4.1.  doxygenFilterForBashToCxx.bash INPUT.bash
+6.4.1.1. STDOUT [text]...
+    |/// 
+    |/// @file
+    |/// 
+    |class INPUT_bash {
+    |
+    |private: bash::map< bash::string > __PrivateVariable;
+    |
+    |public: int8_t PublicFunctionOne() {}
+    |public: int8_t PublicFunctionTwo() {}
+    |
+    |}; //  INPUT_bash
+    |/// (eof)
+6.5. Finalizations.
+6.6. Workspace Impact...
+6.6.1. The initial and final workspace contents are equivalent.
+
+CLUT Source File: doxygenFilterForBashToCxx.bash.clut (6 cases)
+CLUT Output Format Version: 5.5
+CLUT Output Complete.

@@ -1,6 +1,6 @@
 #----------------------------------------------------------------------------------------------------------------------
 ###
-###		Bash/Library/echoInColor.bash
+###		Library/echoInColor.bash
 ###
 ###  @file
 ###  @author	Brian G. Holmes
@@ -9,25 +9,28 @@
 ###
 #----------------------------------------------------------------------------------------------------------------------
 #
-#  Copyright 2018 Brian G. Holmes
+#  Copyright (c) 2018-2019 Brian G. Holmes
 #
-#	This program is part of the Holmespun Makefile Method.
+#	This program is part of the Holmespun Library Bashing repository.
 #
-#	The Holmespun Makefile Method is free software: you can redistribute it and/or modify it under the terms of the
-#	GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or
-#	(at your option) any later version.
+#	The Holmespun Library Bashing repository contains free software: you can redistribute it and/or modify it under
+#	the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of
+#	the License, or (at your option) any later version.
 #
-#	The Holmespun Makefile Method is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-#	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General
-#	Public License for more details.
+#	The Holmespun Library Bashing repository is distributed in the hope that it will be useful, but WITHOUT ANY
+#	WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#	General Public License for more details.
 #
-#	You should have received a copy of the GNU General Public License along with this program.  If not, see
-#	<https://www.gnu.org/licenses/>.
+#	You should have received a copy of the GNU General Public License along with this file. If not, see
+#       <https://www.gnu.org/licenses/>.
 #
 #  See the COPYING.text file for further information.
 #
+#----------------------------------------------------------------------------------------------------------------------
+#
 #  20180311 BGH; created.
-#  20180423 BGH; modified to use HMM_MONOCHROMATIC environment variable.
+#  20180423 BGH; modified to use HOLMESPUN_MONOCHROMATIC environment variable.
+#  20190929 BGH; moved to HLB repo.
 #
 #----------------------------------------------------------------------------------------------------------------------
 ###
@@ -38,12 +41,12 @@
 ###
 ###  @remark	See https://misc.flogisoft.com/bash/tip_colors_and_formatting
 ###
-###  @remark	The Bash/Testing/echoEscapeSequencesForTextColorAndFormat.bash script was created to better understand
+###  @remark	The Testing/echoEscapeSequencesForTextColorAndFormat.bash script was created to better understand
 ###		escape sequences that produce colored and otherwise modified text in a terminal window.
 ###
 ###  @details	The __echoInColor function surrounds the given Message in ColorCode escape sequences that allow the
 ###		text to be highlighted and colored. The ColorCode is itself wrapped in a '\e[' prefix and 'm' suffix,
-###		so represents only the numeric code portion of the escape sequence. If the HMM_MONOCHROMATIC
+###		so represents only the numeric code portion of the escape sequence. If the HOLMESPUN_MONOCHROMATIC
 ###		environment variable is set then the ColorCode is not used.
 ###
 #----------------------------------------------------------------------------------------------------------------------
@@ -53,7 +56,7 @@ function __echoInColor() {
   local -r ColorCode="${1}"
   shift 1
   #
-  if [ "${HMM_MONOCHROMATIC+IS_SET}" = "IS_SET" ]
+  if [ "${HOLMESPUN_MONOCHROMATIC+IS_SET}" = "IS_SET" ]
   then
      #
      echo "${*}"
