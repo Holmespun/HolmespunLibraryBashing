@@ -44,7 +44,7 @@ function INSTALL() {
   local -r GivenUsrBinDSpec=${1-/usr/bin}
   local -r GivenOptHpsDSpec=${2-/opt/holmespun}
   #
-  installHolmespunSoftware ${GivenUsrBinDSpec} ${GivenOptHpsDSpec} HolmespunLibraryBashing Library
+  installHolmespunSoftware ${GivenUsrBinDSpec} ${GivenOptHpsDSpec} HolmespunLibraryBashing Library Utility .bash.conf
   #
 }
 
