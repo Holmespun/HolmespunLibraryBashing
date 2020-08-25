@@ -1,0 +1,1 @@
+s,doxygenFilterForBashToCxx.bash,doxygenFilterForBashToCxx,g
