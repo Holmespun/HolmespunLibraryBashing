@@ -1,0 +1,239 @@
+##------------------------------------------------------------------------------------------------------------
+**
+**  Test script for success_show_simple
+**
+#!/bin/bash
+#
+#  TEST_SCRIPT.bash
+#
+
+source ../Library/sourceWithCare.bash
+
+sourceWithCarePrepare HolmespunLibraryBashing Library echoInColor.bash echoAndExecute.bash
+
+sourceWithCarePublishSafe
+
+echo "sourceWithCarePublishSafe: $(sourceWithCareGetCommand)"
+
+sourceWithCarePublishSafe
+
+echo "sourceWithCarePublishSafe: $(sourceWithCareGetCommand)"
+
+sourceWithCarePublishFull
+
+echo "sourceWithCarePublishFull: $(sourceWithCareGetCommand)"
+
+#
+>>
+>>  Output for success_show_simple
+>>
+sourceWithCarePublishSafe: : sourceWithCare 0; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/../Library/echoAndExecute.bash'; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/../Library/echoInColor.bash'
+sourceWithCarePublishSafe: : sourceWithCare 1
+sourceWithCarePublishFull: : sourceWithCare 0; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/../Library/echoAndExecute.bash'; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/../Library/echoInColor.bash'
+##------------------------------------------------------------------------------------------------------------
+**
+**  Test script for success_show_duplicate_request
+**
+#!/bin/bash
+#
+#  TEST_SCRIPT.bash
+#
+
+source ../Library/sourceWithCare.bash
+
+sourceWithCarePrepare HolmespunLibraryBashing Library echoInColor.bash echoAndExecute.bash
+sourceWithCarePrepare HolmespunLibraryBashing Library echoInColor.bash echoAndExecute.bash
+sourceWithCarePrepare HolmespunLibraryBashing Library echoInColor.bash echoAndExecute.bash
+sourceWithCarePrepare HolmespunLibraryBashing Library echoInColor.bash echoAndExecute.bash
+
+sourceWithCarePublishSafe
+
+echo "sourceWithCarePublishSafe: $(sourceWithCareGetCommand)"
+
+sourceWithCarePublishSafe
+
+echo "sourceWithCarePublishSafe: $(sourceWithCareGetCommand)"
+
+sourceWithCarePublishFull
+
+echo "sourceWithCarePublishFull: $(sourceWithCareGetCommand)"
+
+#
+>>
+>>  Output for success_show_duplicate_request
+>>
+sourceWithCarePublishSafe: : sourceWithCare 0; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/../Library/echoAndExecute.bash'; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/../Library/echoInColor.bash'
+sourceWithCarePublishSafe: : sourceWithCare 4
+sourceWithCarePublishFull: : sourceWithCare 0; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/../Library/echoAndExecute.bash'; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/../Library/echoInColor.bash'
+##------------------------------------------------------------------------------------------------------------
+**
+**  Test script for success_show_multiple_preparation
+**
+#!/bin/bash
+#
+#  TEST_SCRIPT.bash
+#
+
+source ../Library/sourceWithCare.bash
+
+sourceWithCarePrepare HolmespunLibraryBashing Library echoInColor.bash
+sourceWithCarePrepare HolmespunLibraryBashing Library echoAndExecute.bash
+sourceWithCarePrepare HolmespunLibraryBashing Library copyToGarbage_and_moveToGarbage.bash
+
+sourceWithCarePublishSafe
+
+echo "sourceWithCarePublishSafe: $(sourceWithCareGetCommand)"
+
+sourceWithCarePublishSafe
+
+echo "sourceWithCarePublishSafe: $(sourceWithCareGetCommand)"
+
+sourceWithCarePublishFull
+
+echo "sourceWithCarePublishFull: $(sourceWithCareGetCommand)"
+
+#
+>>
+>>  Output for success_show_multiple_preparation
+>>
+sourceWithCarePublishSafe: : sourceWithCare 0; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/../Library/echoAndExecute.bash'; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/../Library/echoInColor.bash'; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/../Library/copyToGarbage_and_moveToGarbage.bash'
+sourceWithCarePublishSafe: : sourceWithCare 3
+sourceWithCarePublishFull: : sourceWithCare 0; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/../Library/echoAndExecute.bash'; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/../Library/echoInColor.bash'; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/../Library/copyToGarbage_and_moveToGarbage.bash'
+##------------------------------------------------------------------------------------------------------------
+**
+**  Test script for failure_bad_file_name
+**
+#!/bin/bash
+#
+#  TEST_SCRIPT.bash
+#
+
+source ../Library/sourceWithCare.bash
+
+sourceWithCarePrepare HolmespunLibraryBashing Library echoInColor.bash echoAndExecute.bash
+sourceWithCarePrepare HolmespunLibraryBashing Library EchoInColor.bash echoAndExecute.bash
+
+sourceWithCarePublishSafe
+
+echo "sourceWithCarePublishSafe: $(sourceWithCareGetCommand)"
+
+sourceWithCarePublishSafe
+
+echo "sourceWithCarePublishSafe: $(sourceWithCareGetCommand)"
+
+sourceWithCarePublishFull
+
+echo "sourceWithCarePublishFull: $(sourceWithCareGetCommand)"
+
+#
+>>
+>>  Output for failure_bad_file_name
+>>
+ERROR: The _HOME_/Holmespun/HolmespunLibraryBashing/Library/../Library/EchoInColor.bash file was not found.
+##------------------------------------------------------------------------------------------------------------
+**
+**  Test script for failure_bad_repo_name
+**
+#!/bin/bash
+#
+#  TEST_SCRIPT.bash
+#
+
+source ../Library/sourceWithCare.bash
+
+sourceWithCarePrepare HolmespunLibraryBashing Library echoInColor.bash echoAndExecute.bash
+sourceWithCarePrepare ZolmespunLibraryBashing Library echoInColor.bash echoAndExecute.bash
+
+sourceWithCarePublishSafe
+
+echo "sourceWithCarePublishSafe: $(sourceWithCareGetCommand)"
+
+sourceWithCarePublishSafe
+
+echo "sourceWithCarePublishSafe: $(sourceWithCareGetCommand)"
+
+sourceWithCarePublishFull
+
+echo "sourceWithCarePublishFull: $(sourceWithCareGetCommand)"
+
+#
+>>
+>>  Output for failure_bad_repo_name
+>>
+../Library/sourceWithCare.bash: line 101: hash: whereZolmespunLibraryBashing: not found
+ERROR: The whereZolmespunLibraryBashing script was not found.
+INFO:  The script is defined in the ZolmespunLibraryBashing repository.
+INFO:  Install that repository or add ZolmespunLibraryBashing/bin to your PATH.
+##------------------------------------------------------------------------------------------------------------
+**
+**  Test script for success_demostration
+**
+#!/bin/bash
+#
+#  TEST_SCRIPT.bash
+#
+
+source ../Library/sourceWithCare.bash
+
+sourceWithCarePrepare HolmespunLibraryBashing Library echoInColor.bash echoAndExecute.bash
+
+sourceWithCarePublishSafe
+
+eval $(sourceWithCareGetCommand)
+
+echoInColorRed Safe Success
+
+sourceWithCarePublishSafe
+
+echo "sourceWithCarePublishSafe: $(sourceWithCareGetCommand)"
+
+sourceWithCarePublishSafe
+
+echo "sourceWithCarePublishSafe: $(sourceWithCareGetCommand)"
+
+sourceWithCarePublishFull
+
+echo "sourceWithCarePublishFull: $(sourceWithCareGetCommand)"
+
+#
+>>
+>>  Output for success_demostration
+>>
+[38;5;9mSafe Success[0m
+sourceWithCarePublishSafe: : sourceWithCare 1
+sourceWithCarePublishSafe: : sourceWithCare 1
+sourceWithCarePublishFull: : sourceWithCare 0; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/../Library/echoAndExecute.bash'; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/../Library/echoInColor.bash'
+##------------------------------------------------------------------------------------------------------------
+**
+**  Test script for success_sourceWithCare_is_predefined
+**
+#!/bin/bash
+#
+#  TEST_SCRIPT.bash
+#
+
+source ../Library/sourceWithCare.bash
+
+sourceWithCarePrepare HolmespunLibraryBashing Library sourceWithCare.bash
+
+sourceWithCarePublishSafe
+
+echo "sourceWithCarePublishSafe: $(sourceWithCareGetCommand)"
+
+sourceWithCarePublishSafe
+
+echo "sourceWithCarePublishSafe: $(sourceWithCareGetCommand)"
+
+sourceWithCarePublishFull
+
+echo "sourceWithCarePublishFull: $(sourceWithCareGetCommand)"
+
+#
+>>
+>>  Output for success_sourceWithCare_is_predefined
+>>
+sourceWithCarePublishSafe: : sourceWithCare 0
+sourceWithCarePublishSafe: : sourceWithCare 1
+sourceWithCarePublishFull: : sourceWithCare 0
+##------------------------------------------------------------------------------------------------------------
+##  (eof)

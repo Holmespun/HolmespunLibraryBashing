@@ -136,7 +136,7 @@ CLUT Source File: doxygenFilterForBashToCxx.bash.clut (6 cases)
 1.2. Initializations.
 1.3. Initial Workspace is empty.
 1.4. Target CLU Call.
-1.4.1.  doxygenFilterForBashToCxx.bash
+1.4.1.  doxygenFilterForBashToCxx
 1.5. Finalizations.
 1.6. Workspace Impact...
 1.6.1. The initial and final workspace contents are equivalent.
@@ -170,7 +170,7 @@ CLUT Source File: doxygenFilterForBashToCxx.bash.clut (6 cases)
     |###	Kif	Is	Meek
     |##!				@endcode
 2.4. Target CLU Call.
-2.4.1.  doxygenFilterForBashToCxx.bash INPUT.bash
+2.4.1.  doxygenFilterForBashToCxx INPUT.bash
 2.4.1.1. STDOUT [text]...
     |
     |
@@ -220,7 +220,7 @@ CLUT Source File: doxygenFilterForBashToCxx.bash.clut (6 cases)
     |  Bash statements on following lines
     |}
 3.4. Target CLU Call.
-3.4.1.  doxygenFilterForBashToCxx.bash INPUT.bash
+3.4.1.  doxygenFilterForBashToCxx INPUT.bash
 3.4.1.1. STDOUT [text]...
     |/// @returns A Linux exit status value (uint8_t in the range 0..255).
     |/// @param Parameter1 Example HMM::PARAMeter.
@@ -397,7 +397,7 @@ CLUT Source File: doxygenFilterForBashToCxx.bash.clut (6 cases)
     |declare -i -p NumericVariable_p=Strung out value
     |declare    -p TextualVariable_p=Strung out value
 4.4. Target CLU Call.
-4.4.1.  doxygenFilterForBashToCxx.bash INPUT.bash
+4.4.1.  doxygenFilterForBashToCxx INPUT.bash
 4.4.1.1. STDOUT [text]...
     |
     |
@@ -565,7 +565,7 @@ CLUT Source File: doxygenFilterForBashToCxx.bash.clut (6 cases)
     |alias double_quoted="find . -name '*.bash'"
     |alias -p oops
 5.4. Target CLU Call.
-5.4.1.  doxygenFilterForBashToCxx.bash INPUT.bash
+5.4.1.  doxygenFilterForBashToCxx INPUT.bash
 5.4.1.1. STDOUT [text]...
     |
     |
@@ -599,7 +599,7 @@ CLUT Source File: doxygenFilterForBashToCxx.bash.clut (6 cases)
     |#  Insignificant line that will be used to end the class wrapper.
     |###  (eof)
 6.4. Target CLU Call.
-6.4.1.  doxygenFilterForBashToCxx.bash INPUT.bash
+6.4.1.  doxygenFilterForBashToCxx INPUT.bash
 6.4.1.1. STDOUT [text]...
     |/// 
     |/// @file

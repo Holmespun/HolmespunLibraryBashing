@@ -101,16 +101,16 @@ function __wordsNotKnown() {
   CommandPrefix+=" | grep --invert-match \"^[A-Z0-9]\\\{,\\\}$\""
   #
   #  ListOfConfigFSpec: The configuration files to be applied to each file.
-  #  GrepComponent: Remove words that the user does not want reported.
+  #  GrepCompo: Remove words that the user does not want reported.
   #
   local    ListOfConfigFSpec=
-  local    GrepComponent=
+  local    GrepCompo=
   #
   [ -s ${HOME}/.wordsNotKnown.conf ] && ListOfConfigFSpec+=" ${HOME}/.wordsNotKnown.conf"
   #
   [ "${HOME}" != "${PWD}" ] && [ -s ./.wordsNotKnown.conf ] && ListOfConfigFSpec+=" ./.wordsNotKnown.conf"
   #
-  [ ${#ListOfConfigFSpec} -gt 0 ] && GrepComponent="| grep --word-regexp --invert-match ${ListOfConfigFSpec// / --file=}"
+  [ ${#ListOfConfigFSpec} -gt 0 ] && GrepCompo="| grep --word-regexp --invert-match ${ListOfConfigFSpec// / --file=}"
   #
   #  For every file specified...
   #
@@ -127,7 +127,7 @@ function __wordsNotKnown() {
     #
     #  For each word not known in the target file...
     #
-    for WordNotKnownItem in $(cat ${TargetFSpec} | eval ${CommandPrefix} ${GrepComponent})
+    for WordNotKnownItem in $(cat ${TargetFSpec} | eval ${CommandPrefix} ${GrepCompo})
     do
       #
       if [ "${WordNotKnownBy[${WordNotKnownItem}]+IS_SET}" = IS_SET ]
