@@ -1,0 +1,136 @@
+##------------------------------------------------------------------------------------------------------------
+**
+**  Test script for success_simple
+**
+#!/bin/bash
+#
+#  TEST_SCRIPT.bash
+#
+
+source ../Library/indirectFunctionHandler.bash
+
+function Alpha() { echo "Function ${FUNCNAME} was called."; }
+function Beta()  { echo "Function ${FUNCNAME} was called."; }
+function Gamma() { echo "Function ${FUNCNAME} was called."; }
+
+indirectFunctionHandlerDeclare One Alpha
+
+indirectFunctionHandlerCall One
+
+#
+>>
+>>  Output for success_simple
+>>
+Function Alpha was called.
+##------------------------------------------------------------------------------------------------------------
+**
+**  Test script for success_override
+**
+#!/bin/bash
+#
+#  TEST_SCRIPT.bash
+#
+
+source ../Library/indirectFunctionHandler.bash
+
+function Alpha() { echo "Function ${FUNCNAME} was called."; }
+function Beta()  { echo "Function ${FUNCNAME} was called."; }
+function Gamma() { echo "Function ${FUNCNAME} was called."; }
+
+indirectFunctionHandlerDeclare Two Alpha
+indirectFunctionHandlerDeclare Two Beta
+indirectFunctionHandlerDeclare Two Gamma
+
+indirectFunctionHandlerCall Two
+
+#
+>>
+>>  Output for success_override
+>>
+Function Gamma was called.
+##------------------------------------------------------------------------------------------------------------
+**
+**  Test script for failure_no_such_function
+**
+#!/bin/bash
+#
+#  TEST_SCRIPT.bash
+#
+
+source ../Library/indirectFunctionHandler.bash
+
+function Alpha() { echo "Function ${FUNCNAME} was called."; }
+function Beta()  { echo "Function ${FUNCNAME} was called."; }
+function Gamma() { echo "Function ${FUNCNAME} was called."; }
+
+indirectFunctionHandlerDeclare Three Alpha
+indirectFunctionHandlerDeclare Three Theta
+
+indirectFunctionHandlerCall Three
+
+#
+>>
+>>  Output for failure_no_such_function
+>>
+ERROR: The indirectFunctionHandlerDeclare function was given an invalid function name.
+USAGE: indirectFunctionHandlerDeclare <identifier> <function-name>
+Function Alpha was called.
+##------------------------------------------------------------------------------------------------------------
+**
+**  Test script for failure_too_few_parameters
+**
+#!/bin/bash
+#
+#  TEST_SCRIPT.bash
+#
+
+source ../Library/indirectFunctionHandler.bash
+
+function Alpha() { echo "Function ${FUNCNAME} was called."; }
+function Beta()  { echo "Function ${FUNCNAME} was called."; }
+function Gamma() { echo "Function ${FUNCNAME} was called."; }
+
+indirectFunctionHandlerDeclare Four Alpha
+indirectFunctionHandlerDeclare Four
+
+indirectFunctionHandlerCall Four
+
+#
+>>
+>>  Output for failure_too_few_parameters
+>>
+ERROR: The indirectFunctionHandlerDeclare function was called with too few parameters.
+USAGE: indirectFunctionHandlerDeclare <identifier> <function-name>
+Function Alpha was called.
+##------------------------------------------------------------------------------------------------------------
+**
+**  Test script for failure_tag_not_defined
+**
+#!/bin/bash
+#
+#  TEST_SCRIPT.bash
+#
+
+source ../Library/indirectFunctionHandler.bash
+
+function Alpha() { echo "Function ${FUNCNAME} was called."; }
+function Beta()  { echo "Function ${FUNCNAME} was called."; }
+function Gamma() { echo "Function ${FUNCNAME} was called."; }
+
+indirectFunctionHandlerDeclare Five  Alpha
+indirectFunctionHandlerDeclare Six   Beta
+indirectFunctionHandlerDeclare Seven Gamma
+
+indirectFunctionHandlerCall Six
+indirectFunctionHandlerCall Eight
+
+#
+>>
+>>  Output for failure_tag_not_defined
+>>
+Function Beta was called.
+ERROR: Requested indirect call target 'Eight' is not defined.
+INFO:  Request issued within the TEST_SCRIPT.bash file.
+INFO:  Choose one of Seven, Six, Five.
+##------------------------------------------------------------------------------------------------------------
+##  (eof)
