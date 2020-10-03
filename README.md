@@ -73,9 +73,18 @@ The UNINSTALL.bash script performs two main functions:
 It renames the directory it which it resides; and
 It removes the /usr/bin files that were created by the install process.
 
+## To Do Task List
+
+1. Doxygenate the indirectFunctionHandler.bash library file.
+1. Doxygenate the sourceWithCare.bash library file.
+1. Update the README documentation to describe the indirectFunctionHandler.bash library file.
+1. Update the README documentation to describe the sourceWithCare.bash library file.
+1. Update the makefile to support a *doxygen* target.
+
+
 ## Copyright
 
-Copyright (c) 2019 Brian G. Holmes
+Copyright (c) 2019-2020 Brian G. Holmes
 
 This program is part of the Holmespun Library Bashing repository.
 
