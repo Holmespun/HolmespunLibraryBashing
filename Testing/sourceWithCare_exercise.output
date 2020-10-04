@@ -160,7 +160,7 @@ echo "sourceWithCarePublishFull: $(sourceWithCareGetCommand)"
 >>
 >>  Output for failure_bad_repo_name
 >>
-../Library/sourceWithCare.bash: line 101: hash: whereZolmespunLibraryBashing: not found
+../Library/sourceWithCare.bash: line 128: hash: whereZolmespunLibraryBashing: not found
 ERROR: The whereZolmespunLibraryBashing script was not found.
 INFO:  The script is defined in the ZolmespunLibraryBashing repository.
 INFO:  Install that repository or add ZolmespunLibraryBashing/bin to your PATH.
@@ -232,8 +232,105 @@ echo "sourceWithCarePublishFull: $(sourceWithCareGetCommand)"
 >>
 >>  Output for success_sourceWithCare_is_predefined
 >>
-sourceWithCarePublishSafe: : sourceWithCare 0
+sourceWithCarePublishSafe: : sourceWithCare 0; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/../Library/sourceWithCare.bash'
 sourceWithCarePublishSafe: : sourceWithCare 1
-sourceWithCarePublishFull: : sourceWithCare 0
+sourceWithCarePublishFull: : sourceWithCare 0; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/../Library/sourceWithCare.bash'
+##------------------------------------------------------------------------------------------------------------
+**
+**  Test script for failure_no_repo_name
+**
+#!/bin/bash
+#
+#  TEST_SCRIPT.bash
+#
+
+source ../Library/sourceWithCare.bash
+
+sourceWithCarePrepare HolmespunLibraryBashing Library echoInColor.bash echoAndExecute.bash
+sourceWithCarePrepare
+
+sourceWithCarePublishSafe
+
+echo "sourceWithCarePublishSafe: $(sourceWithCareGetCommand)"
+
+sourceWithCarePublishSafe
+
+echo "sourceWithCarePublishSafe: $(sourceWithCareGetCommand)"
+
+sourceWithCarePublishFull
+
+echo "sourceWithCarePublishFull: $(sourceWithCareGetCommand)"
+
+#
+>>
+>>  Output for failure_no_repo_name
+>>
+ERROR: No repository name was specified.
+USAGE: sourceWithCarePrepare <repo-name> [ <subfolder-spec> <source-file-name>... ]
+##------------------------------------------------------------------------------------------------------------
+**
+**  Test script for failure_no_file_name
+**
+#!/bin/bash
+#
+#  TEST_SCRIPT.bash
+#
+
+source ../Library/sourceWithCare.bash
+
+sourceWithCarePrepare HolmespunLibraryBashing Library echoInColor.bash echoAndExecute.bash
+sourceWithCarePrepare HolmespunLibraryBashing Library
+
+sourceWithCarePublishSafe
+
+echo "sourceWithCarePublishSafe: $(sourceWithCareGetCommand)"
+
+sourceWithCarePublishSafe
+
+echo "sourceWithCarePublishSafe: $(sourceWithCareGetCommand)"
+
+sourceWithCarePublishFull
+
+echo "sourceWithCarePublishFull: $(sourceWithCareGetCommand)"
+
+#
+>>
+>>  Output for failure_no_file_name
+>>
+ERROR: A subfolder (Library) was specified but no files were.
+USAGE: sourceWithCarePrepare <repo-name> [ <subfolder-spec> <source-file-name>... ]
+##------------------------------------------------------------------------------------------------------------
+**
+**  Test script for sucess_only_repo_name
+**
+#!/bin/bash
+#
+#  TEST_SCRIPT.bash
+#
+
+source ../Library/sourceWithCare.bash
+
+sourceWithCarePrepare HolmespunLibraryBashing
+sourceWithCarePrepare HolmespunLibraryBashing Library echoInColor.bash echoAndExecute.bash
+
+sourceWithCarePublishSafe
+
+echo "sourceWithCarePublishSafe: $(sourceWithCareGetCommand)"
+
+sourceWithCarePublishSafe
+
+echo "sourceWithCarePublishSafe: $(sourceWithCareGetCommand)"
+
+sourceWithCarePublishFull
+
+echo "sourceWithCarePublishFull: $(sourceWithCareGetCommand)"
+
+#
+>>
+>>  Output for sucess_only_repo_name
+>>
+sourceWithCarePublishSafe: : sourceWithCare 0; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/../Library/echoAndExecute.bash'; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/../Library/echoInColor.bash'
+sourceWithCarePublishSafe: : sourceWithCare 2
+sourceWithCarePublishFull: : sourceWithCare 0; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/../Library/echoAndExecute.bash'; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/../Library/echoInColor.bash'
 ##------------------------------------------------------------------------------------------------------------
 ##  (eof)

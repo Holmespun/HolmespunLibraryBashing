@@ -67,12 +67,37 @@ declare    __SourceWithCareCommand=
 
 function sourceWithCarePrepare() {
   #
-  local RepositoryName=${1-UNDEFINED}
-  local SubfolderDSpec=${2-}
-  shift 2
+  local RepositoryName=${1-}
+  shift 1
+  local SubfolderDSpec=${1-}
+  shift 1
   local SourceFileList=${*}
   #
   local SourceFileItem SourceFileFSpec
+  #
+  #  A repository name must be specified.
+  #
+  if [ ${#RepositoryName} -eq 0 ]
+  then
+     #
+     echo "ERROR: No repository name was specified."
+     echo "USAGE: sourceWithCarePrepare <repo-name> [ <subfolder-spec> <source-file-name>... ]"
+     #
+     exit 9
+     #
+  fi
+  #
+  #  If a subfolder is specified then so must at least one file be listed.
+  #
+  if [ ${#SubfolderDSpec} -gt 0 ] && [ ${#SourceFileList} -eq 0 ]
+  then
+     #
+     echo "ERROR: A subfolder (${SubfolderDSpec}) was specified but no files were."
+     echo "USAGE: sourceWithCarePrepare <repo-name> [ <subfolder-spec> <source-file-name>... ]"
+     #
+     exit 8
+     #
+  fi
   #
   #  Predefine this file for the zeroeth iteration.
   #
@@ -82,6 +107,8 @@ function sourceWithCarePrepare() {
      __SourceWithCareWhereRepo["HolmespunLibraryBashing"]="$(cd $(dirname ${BASH_SOURCE[0]}); echo ${PWD})/.."
      #
      SourceFileFSpec="${__SourceWithCareWhereRepo["HolmespunLibraryBashing"]}/Library/$(basename ${BASH_SOURCE[0]})"
+     #
+     SourceFileFSpec="${SourceFileFSpec/\/Library\/..\/Library\//\/Library\/}"
      #
      __SourceWithCareIterationOfFile["${SourceFileFSpec}"]=0
      #
@@ -107,7 +134,7 @@ function sourceWithCarePrepare() {
         echo "INFO:  The script is defined in the ${RepositoryName} repository."
         echo "INFO:  Install that repository or add ${RepositoryName}/bin to your PATH."
         #
-        exit 9
+        exit 7
         #
      fi
      #
@@ -130,7 +157,7 @@ function sourceWithCarePrepare() {
           #
           echo "ERROR: The ${SourceFileFSpec} file was not found." 1>&1
           #
-          exit 8
+          exit 6
           #
        fi
        #

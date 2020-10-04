@@ -221,6 +221,54 @@ function success_demostration() {
  
 #----------------------------------------------------------------------------------------------------------------------
 
+function failure_no_file_name() {
+  #
+  local -r FSpec=${1}
+  #
+  initialize ${FSpec}
+  #
+  spit ${FSpec} "sourceWithCarePrepare HolmespunLibraryBashing Library echoInColor.bash echoAndExecute.bash"
+  spit ${FSpec} "sourceWithCarePrepare HolmespunLibraryBashing Library"
+  spit ${FSpec} ""
+  #
+  complete ${FSpec}
+  #
+}
+
+#----------------------------------------------------------------------------------------------------------------------
+
+function failure_no_repo_name() {
+  #
+  local -r FSpec=${1}
+  #
+  initialize ${FSpec}
+  #
+  spit ${FSpec} "sourceWithCarePrepare HolmespunLibraryBashing Library echoInColor.bash echoAndExecute.bash"
+  spit ${FSpec} "sourceWithCarePrepare"
+  spit ${FSpec} ""
+  #
+  complete ${FSpec}
+  #
+}
+
+#----------------------------------------------------------------------------------------------------------------------
+
+function sucess_only_repo_name() {
+  #
+  local -r FSpec=${1}
+  #
+  initialize ${FSpec}
+  #
+  spit ${FSpec} "sourceWithCarePrepare HolmespunLibraryBashing"
+  spit ${FSpec} "sourceWithCarePrepare HolmespunLibraryBashing Library echoInColor.bash echoAndExecute.bash"
+  spit ${FSpec} ""
+  #
+  complete ${FSpec}
+  #
+}
+
+#----------------------------------------------------------------------------------------------------------------------
+
 run_test success_show_simple
 run_test success_show_duplicate_request
 run_test success_show_multiple_preparation
@@ -231,6 +279,11 @@ run_test failure_bad_repo_name
 run_test success_demostration
 
 run_test success_sourceWithCare_is_predefined
+
+run_test failure_no_repo_name
+run_test failure_no_file_name
+
+run_test sucess_only_repo_name
 
 echo "##------------------------------------------------------------------------------------------------------------"
 echo "##  (eof)"
