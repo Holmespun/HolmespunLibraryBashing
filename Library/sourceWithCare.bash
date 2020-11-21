@@ -55,6 +55,8 @@
 #
 #----------------------------------------------------------------------------------------------------------------------
 
+[ "${__SourceWithCareIterationPrepared+IS_SET}" = "IS_SET" ] && return
+
 declare -A __SourceWithCareWhereRepo
 declare -A __SourceWithCareIterationOfFile
 

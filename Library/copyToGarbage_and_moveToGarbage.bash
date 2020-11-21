@@ -41,11 +41,13 @@
 #
 #----------------------------------------------------------------------------------------------------------------------
 
-declare -r __BashingLibraryDSpec=$(whereHolmespunLibraryBashing)/Library
+source $(whereHolmespunLibraryBashing)/Library/sourceWithCare.bash
 
-source ${__BashingLibraryDSpec}/echoAndExecute.bash
-source ${__BashingLibraryDSpec}/echoGarbageDSpec.bash
-source ${__BashingLibraryDSpec}/echoLocalArchiveNameFor.bash
+sourceWithCarePrepare HolmespunLibraryBashing Library echoAndExecute.bash
+sourceWithCarePrepare HolmespunLibraryBashing Library echoGarbageDSpec.bash
+sourceWithCarePrepare HolmespunLibraryBashing Library echoLocalArchiveNameFor.bash
+
+sourceWithCarePublishSafe; eval $(sourceWithCareGetCommand)
 
 #----------------------------------------------------------------------------------------------------------------------
 ###

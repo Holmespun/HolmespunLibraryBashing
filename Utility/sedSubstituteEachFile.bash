@@ -16,8 +16,6 @@
 ###			The work "changed" is used to indicate that the content was modified; the word "renamed" is
 ###			used to indicate that the file was renamed.
 ###
-###	TODO		Preserve the permissions associated with each modified file.
-###
 #----------------------------------------------------------------------------------------------------------------------
 #
 #  Copyright (c) 2006-2019 Brian G. Holmes
@@ -42,6 +40,7 @@
 #  20061112 BGH; formalized a very old SH script.
 #  20180303 BGH; renamed from sed_substitute_each_file.bash, added to HMM repo, added checking for file existence.
 #  20190929 BGH; moved to HLB repo.
+#  20201029 BGH; preserving the permissions associated with each modified file.
 #
 #----------------------------------------------------------------------------------------------------------------------
 
@@ -82,7 +81,7 @@ function __sedSubstituteEachFile() {
   #
   local -A ListOfTargetFSpec
   #
-  local    TargetFSpec ResultFSpec Status
+  local    TargetFSpec ResultFSpec Status TargetFPerm
   #
   for TargetFSpec in ${ListOfFSpec}
   do
@@ -102,6 +101,8 @@ function __sedSubstituteEachFile() {
   #
   for TargetFSpec in ${!ListOfTargetFSpec[*]}
   do
+    #
+    TargetFPerm=$(stat --format=%a ${TargetFSpec})
     #
     ResultFSpec=`echo ${TargetFSpec} | sed s,${Rexpression},${Replacement},g`
     #
@@ -125,13 +126,17 @@ function __sedSubstituteEachFile() {
           #
           echo "${TargetFSpec} (renamed)"
           #
-  	mv ${TargetFSpec} ${ResultFSpec}
+  	  mv ${TargetFSpec} ${ResultFSpec}
+          #
+          chmod ${TargetFPerm} ${ResultFSpec}
           #
        fi
        #
     else
        #
        mv ${TargetFSpec}.${ScriptFName}.$$ ${TargetFSpec}
+       #
+       chmod ${TargetFPerm} ${TargetFSpec}
        #
        if [ "${TargetFSpec}" = "${ResultFSpec}" ]
        then
@@ -142,7 +147,7 @@ function __sedSubstituteEachFile() {
           #
           echo "${TargetFSpec} (changed,renamed)"
           #
-  	mv ${TargetFSpec} ${ResultFSpec}
+  	  mv ${TargetFSpec} ${ResultFSpec}
           #
        fi
        #
