@@ -106,11 +106,9 @@ function sourceWithCarePrepare() {
   if [ ${__SourceWithCareIterationPrepared} -eq 0 ]
   then
      #
-     __SourceWithCareWhereRepo["HolmespunLibraryBashing"]="$(cd $(dirname ${BASH_SOURCE[0]}); echo ${PWD})/.."
+     __SourceWithCareWhereRepo["HolmespunLibraryBashing"]="$(cd $(dirname ${BASH_SOURCE[0]}); echo $(dirname ${PWD}))"
      #
      SourceFileFSpec="${__SourceWithCareWhereRepo["HolmespunLibraryBashing"]}/Library/$(basename ${BASH_SOURCE[0]})"
-     #
-     SourceFileFSpec="${SourceFileFSpec/\/Library\/..\/Library\//\/Library\/}"
      #
      __SourceWithCareIterationOfFile["${SourceFileFSpec}"]=0
      #
