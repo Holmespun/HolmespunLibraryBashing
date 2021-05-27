@@ -59,7 +59,7 @@ sourceWithCarePublishSafe; eval $(sourceWithCareGetCommand)
 ###
 ###  @details	The __portToGarbage function applies the PortCommand to a ListOfSourceFSpec.
 ###  		The PortCommand is likely a form of cp or mv command.
-###  		Each file is moved into a garbage directory: The first of ${HMM_GARBAGE_DSPEC}, ${GARBAGE}, or
+###  		Each file is moved into a garbage directory: The first of ${HOLMESPUN_GARBAGE_DSPEC}, ${GARBAGE}, or
 ###  		${HOME}/Garbage to be non-null. An error is raised if this directory does not already exist.
 ###
 ###  		Within the garbage directory, a YYYYMM directory is created base on the current year and month.

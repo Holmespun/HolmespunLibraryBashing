@@ -82,8 +82,8 @@ function sourceWithCarePrepare() {
   if [ ${#RepositoryName} -eq 0 ]
   then
      #
-     echo "ERROR: No repository name was specified."
-     echo "USAGE: sourceWithCarePrepare <repo-name> [ <subfolder-spec> <source-file-name>... ]"
+     echo "ERROR: No repository name was specified."                                                    >&2
+     echo "USAGE: sourceWithCarePrepare <repo-name> [ <subfolder-spec> <source-file-name>... ]"         >&2
      #
      exit 9
      #
@@ -94,8 +94,8 @@ function sourceWithCarePrepare() {
   if [ ${#SubfolderDSpec} -gt 0 ] && [ ${#SourceFileList} -eq 0 ]
   then
      #
-     echo "ERROR: A subfolder (${SubfolderDSpec}) was specified but no files were."
-     echo "USAGE: sourceWithCarePrepare <repo-name> [ <subfolder-spec> <source-file-name>... ]"
+     echo "ERROR: A subfolder (${SubfolderDSpec}) was specified but no files were."                     >&2
+     echo "USAGE: sourceWithCarePrepare <repo-name> [ <subfolder-spec> <source-file-name>... ]"         >&2
      #
      exit 8
      #
@@ -130,9 +130,9 @@ function sourceWithCarePrepare() {
      if [ ${?} -ne 0 ]
      then
         #
-        echo "ERROR: The where${RepositoryName} script was not found."
-        echo "INFO:  The script is defined in the ${RepositoryName} repository."
-        echo "INFO:  Install that repository or add ${RepositoryName}/bin to your PATH."
+        echo "ERROR: The where${RepositoryName} script was not found."                                  >&2
+        echo "INFO:  The script is defined in the ${RepositoryName} repository."                        >&2
+        echo "INFO:  Install that repository or add ${RepositoryName}/bin to your PATH."                >&2
         #
         exit 7
         #
@@ -155,7 +155,7 @@ function sourceWithCarePrepare() {
        if [ ! -f ${SourceFileFSpec} ]
        then
           #
-          echo "ERROR: The ${SourceFileFSpec} file was not found." 1>&1
+          echo "ERROR: The ${SourceFileFSpec} file was not found."                                      >&2
           #
           exit 6
           #

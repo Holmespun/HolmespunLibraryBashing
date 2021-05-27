@@ -55,7 +55,7 @@
 
 function spew() {
   #
-  local FSpec=${1}
+  local -r FSpec=${1}
   shift 1
   #
   cat ${*} >> ${FSpec}
@@ -73,10 +73,16 @@ function spew() {
 
 function spit() {
   #
-  local FSpec=${1}
+  local -r FSpec=${1}
   shift 1
   #
   echo "${*}" >> ${FSpec}
+  #
+  local -r -i Status=${?}
+  #
+  [ ${Status} -ne 0 ] && echo "ERROR: Unable to ${FUNCNAME} '${*}' into ${FSpec}."
+  #
+  return ${Status}
   #
 }
 

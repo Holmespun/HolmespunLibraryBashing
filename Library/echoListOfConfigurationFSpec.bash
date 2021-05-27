@@ -29,6 +29,7 @@
 #----------------------------------------------------------------------------------------------------------------------
 #
 #  20201121 BGH; created.
+#  20210505 BGH; allow user to define root/base directory that all files must share, instead of absolute possibilities.
 #
 #----------------------------------------------------------------------------------------------------------------------
 ###
@@ -62,8 +63,8 @@ function __echoHierarchyListOfDSpec() {
 ###
 ###  @fn	echoListOfConfigurationFSpec
 ###  @param	ConfigurationFName The name of the configuration files of interest.
-###  @param     OverrideDListVName The name of a variable that - if set - should be used to override the normal
-###             locations and order of configuration files.
+###  @param     BaseDirectoryVName The name of a variable that - if set - defines that base/root/parent directory of
+###             all of the specifications echoed.
 ###  @brief	Displays a list of specifications to existing configuration files based on the HMM configuration
 ###             hierachy. The HMM configuration hierarchy includes the directories ${HOME}/.config/holmespun and
 ###             ${HOME} followed by all of the directories from the $PWD down to - but not including - a *base*
@@ -108,26 +109,57 @@ function __echoHierarchyListOfDSpec() {
 function echoListOfConfigurationFSpec() {
   #
   local -r ConfigurationFName=${1}
-  local -r OverrideDListVName=${2-}
+  local -r BaseDirectoryVName=${2-}
   #
+  local    BaseDirectoryFSpec Decision
+  #
+  local -r ListOfHierarchyDSpec="${HOME}/.config/holmespun ${HOME} $(__echoHierarchyListOfDSpec)"
   local    ItemOfHierarchyDSpec
-  local    ListOfHierarchyDSpec
   #
-  if [ ${#OverrideDListVName} -gt 0 ] && [ "${!OverrideDListVName+IS_SET}" = "IS_SET" ]
+  if [ ${#BaseDirectoryVName} -gt 0 ] && [ "${!BaseDirectoryVName+IS_SET}" = "IS_SET" ]
   then
-     ListOfHierarchyDSpec="${!OverrideDListVName}"
+     #
+     BaseDirectoryFSpec="${!BaseDirectoryVName}"
+     #
+#    echo "ConfigurationFName=${ConfigurationFName}" >&2
+#    echo "BaseDirectoryVName=${BaseDirectoryVName}" >&2
+#    echo "BaseDirectoryFSpec=${BaseDirectoryFSpec}" >&2
+     #
+     for ItemOfHierarchyDSpec in ${ListOfHierarchyDSpec}
+     do
+       #
+#      Decision="REJECTED"
+       #
+       if [ "${ItemOfHierarchyDSpec:0:${#BaseDirectoryFSpec}}" = "${BaseDirectoryFSpec}" ]
+       then
+          #
+#         Decision="NOTFOUND"
+          #
+          if [ -e ${ItemOfHierarchyDSpec}/${ConfigurationFName} ]
+          then
+             #
+             echo ${ItemOfHierarchyDSpec}/${ConfigurationFName}
+             #
+#            Decision="ACCEPTED"
+             #
+          fi
+          #
+       fi
+       #
+#      echo "${Decision} ${ItemOfHierarchyDSpec}" >&2
+       #
+     done
+     #
   else
-     ListOfHierarchyDSpec="${HOME}/.config/holmespun ${HOME} $(__echoHierarchyListOfDSpec)"
+     #
+     for ItemOfHierarchyDSpec in ${ListOfHierarchyDSpec}
+     do
+       #
+       [ -e ${ItemOfHierarchyDSpec}/${ConfigurationFName} ] && echo ${ItemOfHierarchyDSpec}/${ConfigurationFName}
+       #
+     done
+     #
   fi
-  #
-  for ItemOfHierarchyDSpec in ${ListOfHierarchyDSpec}
-  do
-    #
-    [ -e ${ItemOfHierarchyDSpec}/${ConfigurationFName} ] && echo ${ItemOfHierarchyDSpec}/${ConfigurationFName}
-    #
-    #[ ! -e ${ItemOfHierarchyDSpec}/${ConfigurationFName} ] && echo NOT ${ItemOfHierarchyDSpec}/${ConfigurationFName}>&2
-    #
-  done
   #
 }
 

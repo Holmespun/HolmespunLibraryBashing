@@ -31,6 +31,7 @@
 #  20180311 BGH; created.
 #  20180423 BGH; modified to use HOLMESPUN_MONOCHROMATIC environment variable.
 #  20190929 BGH; moved to HLB repo.
+#  20210508 BGH; support for mauve and teal.
 #
 #----------------------------------------------------------------------------------------------------------------------
 ###
@@ -79,6 +80,10 @@ function __echoInColor() {
 ###  @param	Message	Text to be displayed.
 ###  @brief	Displays a textual message in green.
 ###
+###  @fn	echoInColorMauve
+###  @param	Message	Text to be displayed.
+###  @brief	Displays a textual message in mauve (pale purple).
+###
 ###  @fn	echoInColorRed
 ###  @param	Message	Text to be displayed.
 ###  @brief	Displays a textual message in red.
@@ -86,6 +91,10 @@ function __echoInColor() {
 ###  @fn	echoInColorRedBold
 ###  @param	Message	Text to be displayed.
 ###  @brief	Displays a textual message in bold red.
+###
+###  @fn	echoInColorTeal
+###  @param	Message	Text to be displayed.
+###  @brief	Displays a textual message in teal (dark greenish-blue).
 ###
 ###  @fn	echoInColorWhite
 ###  @param	Message	Text to be displayed.
@@ -104,8 +113,10 @@ function __echoInColor() {
 function echoInColorBlue()	{ __echoInColor "38;5;12"	"${*}"; }
 function echoInColorGreen()	{ __echoInColor "38;5;10"	"${*}"; }
 function echoInColorGreenBold()	{ __echoInColor "38;5;10m\\e[1"	"${*}"; }
+function echoInColorMauve()	{ __echoInColor "38;5;13"	"${*}"; }
 function echoInColorRed()	{ __echoInColor "38;5;9"	"${*}"; }
 function echoInColorRedBold()	{ __echoInColor "38;5;9m\\e[1"	"${*}"; }
+function echoInColorTeal()	{ __echoInColor "38;5;14"	"${*}"; }
 function echoInColorWhite()	{ __echoInColor "38;5;15"	"${*}"; }
 function echoInColorWhiteBold()	{ __echoInColor "38;5;15m\\e[1"	"${*}"; }
 function echoInColorYellow()	{ __echoInColor "38;5;11"	"${*}"; }
