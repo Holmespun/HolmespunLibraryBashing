@@ -2,7 +2,7 @@
 #  .kamaji.sed
 #
 
-s,_HOME_/[^[:space:]]*/\(HolmespunLibraryBashing\),\$\1,g
+s,%HOME%/[^[:space:]]*/\(HolmespunLibraryBashing\),\$\1,g
 s,/opt/[^[:space:]]*/\(HolmespunLibraryBashing\),\$\1,g
 
 #  ../Library/sourceWithCare.bash: line 128: hash: whereZolmespunLibraryBashing: not found

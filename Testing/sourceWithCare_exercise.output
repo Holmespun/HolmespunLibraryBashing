@@ -27,9 +27,9 @@ echo "sourceWithCarePublishFull: $(sourceWithCareGetCommand)"
 >>
 >>  Output for success_show_simple
 >>
-sourceWithCarePublishSafe: : sourceWithCare 0; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/echoInColor.bash'; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/echoAndExecute.bash'
+sourceWithCarePublishSafe: : sourceWithCare 0; source '%HOME%/Holmespun/HolmespunLibraryBashing/Library/echoInColor.bash'; source '%HOME%/Holmespun/HolmespunLibraryBashing/Library/echoAndExecute.bash'
 sourceWithCarePublishSafe: : sourceWithCare 1
-sourceWithCarePublishFull: : sourceWithCare 0; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/echoInColor.bash'; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/echoAndExecute.bash'
+sourceWithCarePublishFull: : sourceWithCare 0; source '%HOME%/Holmespun/HolmespunLibraryBashing/Library/echoInColor.bash'; source '%HOME%/Holmespun/HolmespunLibraryBashing/Library/echoAndExecute.bash'
 ##------------------------------------------------------------------------------------------------------------
 **
 **  Test script for success_show_duplicate_request
@@ -62,9 +62,9 @@ echo "sourceWithCarePublishFull: $(sourceWithCareGetCommand)"
 >>
 >>  Output for success_show_duplicate_request
 >>
-sourceWithCarePublishSafe: : sourceWithCare 0; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/echoInColor.bash'; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/echoAndExecute.bash'
+sourceWithCarePublishSafe: : sourceWithCare 0; source '%HOME%/Holmespun/HolmespunLibraryBashing/Library/echoInColor.bash'; source '%HOME%/Holmespun/HolmespunLibraryBashing/Library/echoAndExecute.bash'
 sourceWithCarePublishSafe: : sourceWithCare 4
-sourceWithCarePublishFull: : sourceWithCare 0; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/echoInColor.bash'; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/echoAndExecute.bash'
+sourceWithCarePublishFull: : sourceWithCare 0; source '%HOME%/Holmespun/HolmespunLibraryBashing/Library/echoInColor.bash'; source '%HOME%/Holmespun/HolmespunLibraryBashing/Library/echoAndExecute.bash'
 ##------------------------------------------------------------------------------------------------------------
 **
 **  Test script for success_show_multiple_preparation
@@ -96,9 +96,9 @@ echo "sourceWithCarePublishFull: $(sourceWithCareGetCommand)"
 >>
 >>  Output for success_show_multiple_preparation
 >>
-sourceWithCarePublishSafe: : sourceWithCare 0; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/echoInColor.bash'; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/copyToGarbage_and_moveToGarbage.bash'; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/echoAndExecute.bash'
+sourceWithCarePublishSafe: : sourceWithCare 0; source '%HOME%/Holmespun/HolmespunLibraryBashing/Library/echoInColor.bash'; source '%HOME%/Holmespun/HolmespunLibraryBashing/Library/copyToGarbage_and_moveToGarbage.bash'; source '%HOME%/Holmespun/HolmespunLibraryBashing/Library/echoAndExecute.bash'
 sourceWithCarePublishSafe: : sourceWithCare 3
-sourceWithCarePublishFull: : sourceWithCare 0; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/echoInColor.bash'; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/copyToGarbage_and_moveToGarbage.bash'; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/echoAndExecute.bash'
+sourceWithCarePublishFull: : sourceWithCare 0; source '%HOME%/Holmespun/HolmespunLibraryBashing/Library/echoInColor.bash'; source '%HOME%/Holmespun/HolmespunLibraryBashing/Library/copyToGarbage_and_moveToGarbage.bash'; source '%HOME%/Holmespun/HolmespunLibraryBashing/Library/echoAndExecute.bash'
 ##------------------------------------------------------------------------------------------------------------
 **
 **  Test script for failure_bad_file_name
@@ -129,7 +129,7 @@ echo "sourceWithCarePublishFull: $(sourceWithCareGetCommand)"
 >>
 >>  Output for failure_bad_file_name
 >>
-ERROR: The _HOME_/Holmespun/HolmespunLibraryBashing/Library/EchoInColor.bash file was not found.
+ERROR: The %HOME%/Holmespun/HolmespunLibraryBashing/Library/EchoInColor.bash file was not found.
 ##------------------------------------------------------------------------------------------------------------
 **
 **  Test script for failure_bad_repo_name
@@ -202,7 +202,7 @@ echo "sourceWithCarePublishFull: $(sourceWithCareGetCommand)"
 [38;5;9mSafe Success[0m
 sourceWithCarePublishSafe: : sourceWithCare 1
 sourceWithCarePublishSafe: : sourceWithCare 1
-sourceWithCarePublishFull: : sourceWithCare 0; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/echoInColor.bash'; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/echoAndExecute.bash'
+sourceWithCarePublishFull: : sourceWithCare 0; source '%HOME%/Holmespun/HolmespunLibraryBashing/Library/echoInColor.bash'; source '%HOME%/Holmespun/HolmespunLibraryBashing/Library/echoAndExecute.bash'
 ##------------------------------------------------------------------------------------------------------------
 **
 **  Test script for success_sourceWithCare_is_predefined
@@ -329,8 +329,8 @@ echo "sourceWithCarePublishFull: $(sourceWithCareGetCommand)"
 >>
 >>  Output for sucess_only_repo_name
 >>
-sourceWithCarePublishSafe: : sourceWithCare 0; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/echoInColor.bash'; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/echoAndExecute.bash'
+sourceWithCarePublishSafe: : sourceWithCare 0; source '%HOME%/Holmespun/HolmespunLibraryBashing/Library/echoInColor.bash'; source '%HOME%/Holmespun/HolmespunLibraryBashing/Library/echoAndExecute.bash'
 sourceWithCarePublishSafe: : sourceWithCare 2
-sourceWithCarePublishFull: : sourceWithCare 0; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/echoInColor.bash'; source '_HOME_/Holmespun/HolmespunLibraryBashing/Library/echoAndExecute.bash'
+sourceWithCarePublishFull: : sourceWithCare 0; source '%HOME%/Holmespun/HolmespunLibraryBashing/Library/echoInColor.bash'; source '%HOME%/Holmespun/HolmespunLibraryBashing/Library/echoAndExecute.bash'
 ##------------------------------------------------------------------------------------------------------------
 ##  (eof)
