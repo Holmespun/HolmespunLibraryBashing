@@ -76,6 +76,10 @@ function __echoInColor() {
 ###  @param	Message	Text to be displayed.
 ###  @brief	Displays a textual message in blue.
 ###
+###  @fn	echoInColorBlueBold
+###  @param	Message	Text to be displayed.
+###  @brief	Displays a textual message in bold blue.
+###
 ###  @fn	echoInColorGreen
 ###  @param	Message	Text to be displayed.
 ###  @brief	Displays a textual message in green.
@@ -83,6 +87,10 @@ function __echoInColor() {
 ###  @fn	echoInColorMauve
 ###  @param	Message	Text to be displayed.
 ###  @brief	Displays a textual message in mauve (pale purple).
+###
+###  @fn	echoInColorMauveBold
+###  @param	Message	Text to be displayed.
+###  @brief	Displays a textual message in bold mauve (pale purple).
 ###
 ###  @fn	echoInColorRed
 ###  @param	Message	Text to be displayed.
@@ -95,6 +103,10 @@ function __echoInColor() {
 ###  @fn	echoInColorTeal
 ###  @param	Message	Text to be displayed.
 ###  @brief	Displays a textual message in teal (dark greenish-blue).
+###
+###  @fn	echoInColorTealBold
+###  @param	Message	Text to be displayed.
+###  @brief	Displays a textual message in bold teal (dark greenish-blue).
 ###
 ###  @fn	echoInColorWhite
 ###  @param	Message	Text to be displayed.
@@ -111,12 +123,15 @@ function __echoInColor() {
 #----------------------------------------------------------------------------------------------------------------------
 
 function echoInColorBlue()	{ __echoInColor "38;5;12"	"${*}"; }
+function echoInColorBlueBold()	{ __echoInColor "38;5;12m\\e[1"	"${*}"; }
 function echoInColorGreen()	{ __echoInColor "38;5;10"	"${*}"; }
 function echoInColorGreenBold()	{ __echoInColor "38;5;10m\\e[1"	"${*}"; }
 function echoInColorMauve()	{ __echoInColor "38;5;13"	"${*}"; }
+function echoInColorMauveBold()	{ __echoInColor "38;5;13m\\e[1"	"${*}"; }
 function echoInColorRed()	{ __echoInColor "38;5;9"	"${*}"; }
 function echoInColorRedBold()	{ __echoInColor "38;5;9m\\e[1"	"${*}"; }
 function echoInColorTeal()	{ __echoInColor "38;5;14"	"${*}"; }
+function echoInColorTealBold()	{ __echoInColor "38;5;14m\\e[1"	"${*}"; }
 function echoInColorWhite()	{ __echoInColor "38;5;15"	"${*}"; }
 function echoInColorWhiteBold()	{ __echoInColor "38;5;15m\\e[1"	"${*}"; }
 function echoInColorYellow()	{ __echoInColor "38;5;11"	"${*}"; }
