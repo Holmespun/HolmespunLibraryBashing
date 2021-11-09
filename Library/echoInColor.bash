@@ -52,7 +52,27 @@
 ###
 #----------------------------------------------------------------------------------------------------------------------
 
-function __echoInColor() {
+function echoInColorGivenWithEscapesDisabled() {
+  #
+  local -r ColorCode="${1}"
+  shift 1
+  #
+  if [ "${HOLMESPUN_MONOCHROMATIC+IS_SET}" = "IS_SET" ]
+  then
+     #
+     echo "${*}"
+     #
+  else
+     #
+     echo "\[\e[${ColorCode}m\]${*}\[\e[0m\]"
+     #
+  fi
+  #
+}
+
+#----------------------------------------------------------------------------------------------------------------------
+
+function echoInColorGivenWithEscapesEnabled() {
   #
   local -r ColorCode="${1}"
   shift 1
@@ -122,18 +142,22 @@ function __echoInColor() {
 ###
 #----------------------------------------------------------------------------------------------------------------------
 
-function echoInColorBlue()	{ __echoInColor "38;5;12"	"${*}"; }
-function echoInColorBlueBold()	{ __echoInColor "38;5;12m\\e[1"	"${*}"; }
-function echoInColorGreen()	{ __echoInColor "38;5;10"	"${*}"; }
-function echoInColorGreenBold()	{ __echoInColor "38;5;10m\\e[1"	"${*}"; }
-function echoInColorMauve()	{ __echoInColor "38;5;13"	"${*}"; }
-function echoInColorMauveBold()	{ __echoInColor "38;5;13m\\e[1"	"${*}"; }
-function echoInColorRed()	{ __echoInColor "38;5;9"	"${*}"; }
-function echoInColorRedBold()	{ __echoInColor "38;5;9m\\e[1"	"${*}"; }
-function echoInColorTeal()	{ __echoInColor "38;5;14"	"${*}"; }
-function echoInColorTealBold()	{ __echoInColor "38;5;14m\\e[1"	"${*}"; }
-function echoInColorWhite()	{ __echoInColor "38;5;15"	"${*}"; }
-function echoInColorWhiteBold()	{ __echoInColor "38;5;15m\\e[1"	"${*}"; }
-function echoInColorYellow()	{ __echoInColor "38;5;11"	"${*}"; }
+function echoInColorBlue()		{ echoInColorGivenWithEscapesEnabled "38;5;12"		"${*}"; }
+function echoInColorBlueBold()		{ echoInColorGivenWithEscapesEnabled "38;5;12m\\e[1"	"${*}"; }
+function echoInColorGreen()		{ echoInColorGivenWithEscapesEnabled "38;5;10"		"${*}"; }
+function echoInColorGreenBold()		{ echoInColorGivenWithEscapesEnabled "38;5;10m\\e[1"	"${*}"; }
+function echoInColorMauve()		{ echoInColorGivenWithEscapesEnabled "38;5;13"		"${*}"; }
+function echoInColorMauveBold()		{ echoInColorGivenWithEscapesEnabled "38;5;13m\\e[1"	"${*}"; }
+function echoInColorRed()		{ echoInColorGivenWithEscapesEnabled "38;5;9"		"${*}"; }
+function echoInColorRedBold()		{ echoInColorGivenWithEscapesEnabled "38;5;9m\\e[1"	"${*}"; }
+function echoInColorTeal()		{ echoInColorGivenWithEscapesEnabled "38;5;14"		"${*}"; }
+function echoInColorTealBold()		{ echoInColorGivenWithEscapesEnabled "38;5;14m\\e[1"	"${*}"; }
+function echoInColorWhite()		{ echoInColorGivenWithEscapesEnabled "38;5;15"		"${*}"; }
+function echoInColorWhiteBold()		{ echoInColorGivenWithEscapesEnabled "38;5;15m\\e[1"	"${*}"; }
+function echoInColorYellow()		{ echoInColorGivenWithEscapesEnabled "38;5;11"		"${*}"; }
+function echoInColorYellowBold()	{ echoInColorGivenWithEscapesEnabled "38;5;11"		"${*}"; }
+
+function echoInColorOrange()   		{ echoInColorGivenWithEscapesEnabled "0;38;5;208"	"${*}"; }
+function echoInColorOrangeBold()	{ echoInColorGivenWithEscapesEnabled "0;38;5;208m\\e[1"	"${*}"; }
 
 #----------------------------------------------------------------------------------------------------------------------
