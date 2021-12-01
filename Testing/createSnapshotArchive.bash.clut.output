@@ -1,0 +1,162 @@
+CLUT Output Begins...
+CLUT Output Format Version: 5.5
+CLUT Source File: createSnapshotArchive.bash.clut (7 cases)
+
+0. Global Information
+0.1. Notations
+    |No notations defined.
+0.2. Requirement Statements
+    |No requirements defined.
+0.3. Requirement Coverage
+    |No requirements defined.
+0.4. Comparable Masks
+    |No masks defined.
+
+1. ParametersNone.
+1.1. Requirements.
+    |None.
+1.2. Initializations.
+1.3. Initial Workspace is empty.
+1.4. Target CLU Call.
+1.4.1.  createSnapshotArchive
+1.4.1.1. Exit Status 1!
+1.4.1.2. STDERR [text]...
+    |USAGE: createSnapshotArchive <source-fspec> <target-dspec>
+    |ERROR: Source file specification required.
+1.5. Finalizations.
+1.6. Workspace Impact...
+1.6.1. The initial and final workspace contents are equivalent.
+
+2. ParametersOneBogus.
+2.1. Requirements.
+    |None.
+2.2. Initializations.
+2.3. Initial Workspace is empty.
+2.4. Target CLU Call.
+2.4.1.  createSnapshotArchive Bobo
+2.4.1.1. Exit Status 1!
+2.4.1.2. STDERR [text]...
+    |USAGE: createSnapshotArchive <source-fspec> <target-dspec>
+    |ERROR: Target directory specification required.
+2.5. Finalizations.
+2.6. Workspace Impact...
+2.6.1. The initial and final workspace contents are equivalent.
+
+3. ParametersTwoBogus.
+3.1. Requirements.
+    |None.
+3.2. Initializations.
+3.3. Initial Workspace is empty.
+3.4. Target CLU Call.
+3.4.1.  createSnapshotArchive Bobo Clown
+3.4.1.1. Exit Status 1!
+3.4.1.2. STDERR [text]...
+    |ERROR: Source file 'Bobo' does not exist.
+3.5. Finalizations.
+3.6. Workspace Impact...
+3.6.1. The initial and final workspace contents are equivalent.
+
+4. ParametersGoodSourceBadTarget.
+4.1. Requirements.
+    |None.
+4.2. Initializations.
+4.2.1. spit SOURCE.txt Source data.
+4.3. Initial Workspace contains one file...
+    |SOURCE.txt
+4.3.1. SOURCE.txt...
+    |Source data.
+4.4. Target CLU Call.
+4.4.1.  createSnapshotArchive SOURCE.txt Clown
+4.4.1.1. Exit Status 1!
+4.4.1.2. STDERR [text]...
+    |ERROR: Target directory 'Clown' does not exist.
+4.5. Finalizations.
+4.6. Workspace Impact...
+4.6.1. The initial and final workspace contents are equivalent.
+
+5. BasicFile.
+5.1. Requirements.
+    |None.
+5.2. Initializations.
+5.2.1. spit SOURCE.txt Source data.
+5.3. Initial Workspace contains one file...
+    |SOURCE.txt
+5.3.1. SOURCE.txt...
+    |Source data.
+5.4. Target CLU Call.
+5.4.1.  createSnapshotArchive SOURCE.txt .
+5.4.1.1. Exit Status 1!
+5.4.1.2. STDOUT [text]...
+    |SOURCE.txt.20211201_091918
+5.5. Finalizations.
+5.6. Workspace Impact...
+    |Only in 05.Omega: SOURCE.txt.20211201_091918.tz
+5.6.1. SOURCE.txt.20211201_091918.tz (created)...
+    |<meta> Tar Gzip file.
+    |<meta> The archive contains the following files...
+    |<meta>     SOURCE.txt.20211201_091918
+
+6. BasicDirectory.
+6.1. Requirements.
+    |None.
+6.2. Initializations.
+6.2.1. mkdir SOURCE/
+6.2.2. spit SOURCE/data.txt Text data.
+6.3. Initial Workspace contains 2 files...
+    |SOURCE
+    |SOURCE/data.txt
+6.3.1. SOURCE contains one file.
+6.3.1.1. data.txt...
+    |Text data.
+6.4. Target CLU Call.
+6.4.1.  createSnapshotArchive SOURCE .
+6.4.1.1. Exit Status 1!
+6.4.1.2. STDOUT [text]...
+    |SOURCE.20211201_091918/
+    |SOURCE.20211201_091918/data.txt
+6.5. Finalizations.
+6.6. Workspace Impact...
+    |Only in 06.Omega: SOURCE.20211201_091918.tz
+6.6.1. SOURCE.20211201_091918.tz (created)...
+    |<meta> Tar Gzip file.
+    |<meta> The archive contains the following files...
+    |<meta>     SOURCE.20211201_091918/
+    |<meta>     SOURCE.20211201_091918/data.txt
+
+7. NestedDirectories.
+7.1. Requirements.
+    |None.
+7.2. Initializations.
+7.2.1. mkdir --parents Nested/SOURCE/
+7.2.2. mkdir --parents Distant/TARGET/
+7.2.3. spit Nested/SOURCE/data.txt Text data.
+7.3. Initial Workspace contains 5 files...
+    |Distant
+    |Distant/TARGET
+    |Nested
+    |Nested/SOURCE
+    |Nested/SOURCE/data.txt
+7.3.1. Distant contains one file.
+7.3.1.1. TARGET is empty.
+7.3.2. Nested contains 2 files.
+7.3.2.1. SOURCE contains one file.
+7.3.2.1.1. data.txt...
+    |Text data.
+7.4. Target CLU Call.
+7.4.1.  createSnapshotArchive Nested/SOURCE Distant/TARGET
+7.4.1.1. Exit Status 1!
+7.4.1.2. STDOUT [text]...
+    |Nested/SOURCE.20211201_091918/
+    |Nested/SOURCE.20211201_091918/data.txt
+7.5. Finalizations.
+7.6. Workspace Impact...
+    |Only in 07.Omega/Distant/TARGET: SOURCE.20211201_091918.tz
+7.6.1. Distant/TARGET/SOURCE.20211201_091918.tz (created)...
+    |<meta> Tar Gzip file.
+    |<meta> The archive contains the following files...
+    |<meta>     Nested/SOURCE.20211201_091918/
+    |<meta>     Nested/SOURCE.20211201_091918/data.txt
+
+CLUT Source File: createSnapshotArchive.bash.clut (7 cases)
+CLUT Output Format Version: 5.5
+CLUT Output Complete.

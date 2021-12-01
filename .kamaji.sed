@@ -9,4 +9,8 @@ s,/opt/[^[:space:]]*/\(HolmespunLibraryBashing\),\$\1,g
 
 s,line [0-9][0-9]*:,line LINENO:,g
 
+# SOURCE.20211201_090441
+
+s,\.[0-9]\{8\}_[0-9]\{6\},.YYYYMMDD_HHMMSS,g
+
 #

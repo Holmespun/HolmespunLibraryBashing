@@ -1,0 +1,100 @@
+#----------------------------------------------------------------------------------------------------------------------
+#
+#  Testing/unpackSnapshotArchive.bash.clut
+#
+#----------------------------------------------------------------------------------------------------------------------
+#
+#  Copyright (c) 2021-2021 Brian G. Holmes
+#
+#	This program is part of the Holmespun Library Bashing repository.
+#
+#	The Holmespun Library Bashing repository contains free software: you can redistribute it and/or modify it under
+#	the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of
+#	the License, or (at your option) any later version.
+#
+#	The Holmespun Library Bashing repository is distributed in the hope that it will be useful, but WITHOUT ANY
+#	WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#	General Public License for more details.
+#
+#	You should have received a copy of the GNU General Public License along with this file. If not, see
+#       <https://www.gnu.org/licenses/>.
+#
+#  See the COPYING.text file for further information.
+#
+#----------------------------------------------------------------------------------------------------------------------
+#
+#  20211201 BGH; created.
+#
+#----------------------------------------------------------------------------------------------------------------------
+
+set -u
+
+export BashLibraryDSpec=$(whereHolmespunLibraryBashing)/Library
+
+source ${BashLibraryDSpec}/spit_spite_spitn_and_spew.bash
+
+#----------------------------------------------------------------------------------------------------------------------
+
+function createUserDataAndArchive() {
+  #
+  mkdir USER/
+  mkdir USER/PROJECT/
+  mkdir USER/PROJECT/D1
+  mkdir USER/PROJECT/D2
+  #
+  spit  USER/PROJECT/D1/data.txt "Txt data."
+  spit  USER/PROJECT/D2/data.text "Text data."
+  #
+  mkdir ARCHIVE/
+  #
+  cd    USER/
+  	#
+  	tar cfz ../ARCHIVE/PROJECT.20211201_090144.tz --transform=s/PROJECT/PROJECT.20211201_090144/ PROJECT
+  	#
+  cd    ..
+  #
+}
+
+#----------------------------------------------------------------------------------------------------------------------
+
+function defineTestCases() {
+  #
+  clut_case_begin		ParametersNone
+  clut_case_end
+  #
+  clut_case_begin		ParametersOneBogus
+  clut_case_parameter		Bobo
+  clut_case_end
+  #
+  clut_case_begin		ParametersTwoBogus
+  clut_case_parameter		Bobo
+  clut_case_parameter		Clown
+  clut_case_end
+  #
+  clut_case_begin		ParametersGoodSourceBadTarget
+  clut_case_initialize		createUserDataAndArchive
+  clut_case_parameter		ARCHIVE/PROJECT.20211201_090144.tz
+  clut_case_parameter		Clown
+  clut_case_end
+  #
+  clut_case_begin		CannotCreateLink
+  clut_case_initialize		createUserDataAndArchive
+  clut_case_parameter		ARCHIVE/PROJECT.20211201_090144.tz
+  clut_case_parameter		USER
+  clut_case_end
+  #
+  clut_case_begin		Simple
+  clut_case_initialize		createUserDataAndArchive
+  clut_case_initialize		mv USER/PROJECT USER/PROJECT.20211130_123456
+  clut_case_initialize		ln --symbolic PROJECT.20211130_123456 USER/PROJECT
+  clut_case_parameter		ARCHIVE/PROJECT.20211201_090144.tz
+  clut_case_parameter		USER
+  clut_case_end
+  #
+}
+
+#----------------------------------------------------------------------------------------------------------------------
+
+clut_definition_set		defineTestCases
+
+#----------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,203 @@
+CLUT Output Begins...
+CLUT Output Format Version: 5.5
+CLUT Source File: unpackSnapshotArchive.bash.clut (6 cases)
+
+0. Global Information
+0.1. Notations
+    |No notations defined.
+0.2. Requirement Statements
+    |No requirements defined.
+0.3. Requirement Coverage
+    |No requirements defined.
+0.4. Comparable Masks
+    |No masks defined.
+
+1. ParametersNone.
+1.1. Requirements.
+    |None.
+1.2. Initializations.
+1.3. Initial Workspace is empty.
+1.4. Target CLU Call.
+1.4.1.  unpackSnapshotArchive
+1.4.1.1. Exit Status 1!
+1.4.1.2. STDERR [text]...
+    |USAGE: unpackSnapshotArchive <source-fspec> <target-dspec>
+    |             <source-fspec> identifies a snapshort archive.
+    |             <target-dspec> identifies the directry into which the archive should be unpacked.
+    |ERROR: Source file specification required.
+1.5. Finalizations.
+1.6. Workspace Impact...
+1.6.1. The initial and final workspace contents are equivalent.
+
+2. ParametersOneBogus.
+2.1. Requirements.
+    |None.
+2.2. Initializations.
+2.3. Initial Workspace is empty.
+2.4. Target CLU Call.
+2.4.1.  unpackSnapshotArchive Bobo
+2.4.1.1. Exit Status 1!
+2.4.1.2. STDERR [text]...
+    |USAGE: unpackSnapshotArchive <source-fspec> <target-dspec>
+    |             <source-fspec> identifies a snapshort archive.
+    |             <target-dspec> identifies the directry into which the archive should be unpacked.
+    |ERROR: Target directory specification required.
+2.5. Finalizations.
+2.6. Workspace Impact...
+2.6.1. The initial and final workspace contents are equivalent.
+
+3. ParametersTwoBogus.
+3.1. Requirements.
+    |None.
+3.2. Initializations.
+3.3. Initial Workspace is empty.
+3.4. Target CLU Call.
+3.4.1.  unpackSnapshotArchive Bobo Clown
+3.4.1.1. Exit Status 1!
+3.4.1.2. STDERR [text]...
+    |ERROR: Source file 'Bobo' does not exist.
+3.5. Finalizations.
+3.6. Workspace Impact...
+3.6.1. The initial and final workspace contents are equivalent.
+
+4. ParametersGoodSourceBadTarget.
+4.1. Requirements.
+    |None.
+4.2. Initializations.
+4.2.1. createUserDataAndArchive
+4.3. Initial Workspace contains 8 files...
+    |ARCHIVE
+    |ARCHIVE/PROJECT.20211201_090144.tz
+    |USER
+    |USER/PROJECT
+    |USER/PROJECT/D1
+    |USER/PROJECT/D1/data.txt
+    |USER/PROJECT/D2
+    |USER/PROJECT/D2/data.text
+4.3.1. ARCHIVE contains one file.
+4.3.1.1. PROJECT.20211201_090144.tz...
+    |<meta> Tar Gzip file.
+    |<meta> The archive contains the following files...
+    |<meta>     PROJECT.20211201_090144/
+    |<meta>     PROJECT.20211201_090144/D1/
+    |<meta>     PROJECT.20211201_090144/D1/data.txt
+    |<meta>     PROJECT.20211201_090144/D2/
+    |<meta>     PROJECT.20211201_090144/D2/data.text
+4.3.2. USER contains 5 files.
+4.3.2.1. PROJECT contains 4 files.
+4.3.2.1.1. D1 contains one file.
+4.3.2.1.1.1. data.txt...
+    |Txt data.
+4.3.2.1.2. D2 contains one file.
+4.3.2.1.2.1. data.text...
+    |Text data.
+4.4. Target CLU Call.
+4.4.1.  unpackSnapshotArchive ARCHIVE/PROJECT.20211201_090144.tz Clown
+4.4.1.1. Exit Status 1!
+4.4.1.2. STDERR [text]...
+    |ERROR: Target directory 'Clown' does not exist.
+4.5. Finalizations.
+4.6. Workspace Impact...
+4.6.1. The initial and final workspace contents are equivalent.
+
+5. CannotCreateLink.
+5.1. Requirements.
+    |None.
+5.2. Initializations.
+5.2.1. createUserDataAndArchive
+5.3. Initial Workspace contains 8 files...
+    |ARCHIVE
+    |ARCHIVE/PROJECT.20211201_090144.tz
+    |USER
+    |USER/PROJECT
+    |USER/PROJECT/D1
+    |USER/PROJECT/D1/data.txt
+    |USER/PROJECT/D2
+    |USER/PROJECT/D2/data.text
+5.3.1. ARCHIVE contains one file.
+5.3.1.1. PROJECT.20211201_090144.tz...
+    |<meta> Tar Gzip file.
+    |<meta> The archive contains the following files...
+    |<meta>     PROJECT.20211201_090144/
+    |<meta>     PROJECT.20211201_090144/D1/
+    |<meta>     PROJECT.20211201_090144/D1/data.txt
+    |<meta>     PROJECT.20211201_090144/D2/
+    |<meta>     PROJECT.20211201_090144/D2/data.text
+5.3.2. USER contains 5 files.
+5.3.2.1. PROJECT contains 4 files.
+5.3.2.1.1. D1 contains one file.
+5.3.2.1.1.1. data.txt...
+    |Txt data.
+5.3.2.1.2. D2 contains one file.
+5.3.2.1.2.1. data.text...
+    |Text data.
+5.4. Target CLU Call.
+5.4.1.  unpackSnapshotArchive ARCHIVE/PROJECT.20211201_090144.tz USER
+5.4.1.1. Exit Status 1!
+5.4.1.2. STDERR [text]...
+    |ERROR: Output file 'USER/PROJECT' is not a symbolic link.
+5.5. Finalizations.
+5.6. Workspace Impact...
+5.6.1. The initial and final workspace contents are equivalent.
+
+6. Simple.
+6.1. Requirements.
+    |None.
+6.2. Initializations.
+6.2.1. createUserDataAndArchive
+6.2.2. mv USER/PROJECT USER/PROJECT.20211130_123456
+6.2.3. ln --symbolic PROJECT.20211130_123456 USER/PROJECT
+6.3. Initial Workspace contains 9 files...
+    |ARCHIVE
+    |ARCHIVE/PROJECT.20211201_090144.tz
+    |USER
+    |USER/PROJECT
+    |USER/PROJECT.20211130_123456
+    |USER/PROJECT.20211130_123456/D1
+    |USER/PROJECT.20211130_123456/D1/data.txt
+    |USER/PROJECT.20211130_123456/D2
+    |USER/PROJECT.20211130_123456/D2/data.text
+6.3.1. ARCHIVE contains one file.
+6.3.1.1. PROJECT.20211201_090144.tz...
+    |<meta> Tar Gzip file.
+    |<meta> The archive contains the following files...
+    |<meta>     PROJECT.20211201_090144/
+    |<meta>     PROJECT.20211201_090144/D1/
+    |<meta>     PROJECT.20211201_090144/D1/data.txt
+    |<meta>     PROJECT.20211201_090144/D2/
+    |<meta>     PROJECT.20211201_090144/D2/data.text
+6.3.2. USER contains 6 files.
+6.3.2.1. PROJECT is a symbolic link to PROJECT.20211130_123456
+6.3.2.2. PROJECT.20211130_123456 contains 4 files.
+6.3.2.2.1. D1 contains one file.
+6.3.2.2.1.1. data.txt...
+    |Txt data.
+6.3.2.2.2. D2 contains one file.
+6.3.2.2.2.1. data.text...
+    |Text data.
+6.4. Target CLU Call.
+6.4.1.  unpackSnapshotArchive ARCHIVE/PROJECT.20211201_090144.tz USER
+6.4.1.1. STDOUT [text]...
+    |PROJECT.20211201_090144/
+    |PROJECT.20211201_090144/D1/
+    |PROJECT.20211201_090144/D1/data.txt
+    |PROJECT.20211201_090144/D2/
+    |PROJECT.20211201_090144/D2/data.text
+6.5. Finalizations.
+6.6. Workspace Impact...
+    |Symbolic links 06.Alpha/USER/PROJECT and 06.Omega/USER/PROJECT differ
+    |Only in 06.Omega/USER: PROJECT.20211201_090144
+    |Only in 06.Omega/USER: PROJECT.was
+6.6.1. USER/PROJECT (changed) is a symbolic link to PROJECT.20211201_090144
+6.6.2. USER/PROJECT.20211201_090144 (created) contains 4 files.
+6.6.2.1. D1 contains one file.
+6.6.2.1.1. data.txt...
+    |Txt data.
+6.6.2.2. D2 contains one file.
+6.6.2.2.1. data.text...
+    |Text data.
+6.6.3. USER/PROJECT.was (created) is a symbolic link to PROJECT.20211130_123456
+
+CLUT Source File: unpackSnapshotArchive.bash.clut (6 cases)
+CLUT Output Format Version: 5.5
+CLUT Output Complete.
