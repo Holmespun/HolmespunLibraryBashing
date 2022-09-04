@@ -80,8 +80,8 @@ function indirectFunctionHandlerDeclare() {
   if [ ${#Function} -eq 0 ]
   then
      #
-     echo "ERROR: The ${FUNCNAME} function was called with too few parameters."                         >&2
-     echo "USAGE: ${FUNCNAME} <identifier> <function-name>"                                             >&2
+     echo "ERROR: The ${FUNCNAME} function was called with too few parameters."                         	>&2
+     echo "USAGE: ${FUNCNAME} <identifier> <function-name>"                                             	>&2
      #
      return 1
      #
@@ -92,14 +92,21 @@ function indirectFunctionHandlerDeclare() {
      if [ $? -ne 0 ] || [[ "${TypeCheck}" != *"function"* ]]
      then
         #
-        echo "ERROR: The ${FUNCNAME} function was given an invalid function name."                      >&2
-        echo "USAGE: ${FUNCNAME} <identifier> <function-name>"                                          >&2
+        echo "ERROR: The ${FUNCNAME} function was given an invalid function name."                      	>&2
+        echo "USAGE: ${FUNCNAME} <identifier> <function-name>"                                          	>&2
+        echo "INFO:  There are ${#__IndirectFunctionHandler[*]} targets declared."				>&2
+        echo "INFO:  The following functions are defined:"                                               	>&2
+        #
+        declare -F												>&2
         #
         return 2
         #
      else
         #
         __IndirectFunctionHandler["${Identity}"]=${Function}
+        #
+#       echo "INFO: indirectFunctionHandlerDeclare ${Function} as ${Identity}."					>&2
+#       echo "INFO: indirectFunctionHandlerDeclare contains ${#__IndirectFunctionHandler[*]} declarations."	>&2
         #
      fi
      #
@@ -168,6 +175,7 @@ function indirectFunctionHandlerCall() {
      #
      echo "ERROR: Requested indirect call target '${TargetRequested}' is not defined."                  >&2
      echo "INFO:  Request issued within the $(basename ${BASH_SOURCE[1]}) file."                        >&2
+     echo "INFO:  There are ${#__IndirectFunctionHandler[*]} targets declared."				>&2
      echo "INFO:  Choose one of ${KnownTargetList:2}."                                                  >&2
      #
      false

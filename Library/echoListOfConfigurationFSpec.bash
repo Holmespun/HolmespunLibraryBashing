@@ -106,6 +106,10 @@ function __echoHierarchyListOfDSpec() {
 ###	
 #----------------------------------------------------------------------------------------------------------------------
 
+declare -i __GlobalDebugFlag=0
+
+#----------------------------------------------------------------------------------------------------------------------
+
 function echoListOfConfigurationFSpec() {
   #
   local -r ConfigurationFName=${1}
@@ -121,32 +125,35 @@ function echoListOfConfigurationFSpec() {
      #
      BaseDirectoryFSpec="${!BaseDirectoryVName}"
      #
-#    echo "ConfigurationFName=${ConfigurationFName}" >&2
-#    echo "BaseDirectoryVName=${BaseDirectoryVName}" >&2
-#    echo "BaseDirectoryFSpec=${BaseDirectoryFSpec}" >&2
+     if [ ${__GlobalDebugFlag} -ne 0 ]
+     then
+        echo "ConfigurationFName=${ConfigurationFName}" >&2
+        echo "BaseDirectoryVName=${BaseDirectoryVName}" >&2
+        echo "BaseDirectoryFSpec=${BaseDirectoryFSpec}" >&2
+     fi
      #
      for ItemOfHierarchyDSpec in ${ListOfHierarchyDSpec}
      do
        #
-#      Decision="REJECTED"
+       Decision="REJECTED"
        #
        if [ "${ItemOfHierarchyDSpec:0:${#BaseDirectoryFSpec}}" = "${BaseDirectoryFSpec}" ]
        then
           #
-#         Decision="NOTFOUND"
+          Decision="NOTFOUND"
           #
           if [ -e ${ItemOfHierarchyDSpec}/${ConfigurationFName} ]
           then
              #
              echo ${ItemOfHierarchyDSpec}/${ConfigurationFName}
              #
-#            Decision="ACCEPTED"
+             Decision="ACCEPTED"
              #
           fi
           #
        fi
        #
-#      echo "${Decision} ${ItemOfHierarchyDSpec}" >&2
+       [ ${__GlobalDebugFlag} -ne 0 ] && echo "${Decision} ${ItemOfHierarchyDSpec}" >&2
        #
      done
      #
