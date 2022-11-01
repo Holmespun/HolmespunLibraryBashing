@@ -22,11 +22,11 @@ KamajiFSpec	?= $(shell which kamaji)
 spellcheck :
 	@echo "make $@"
 	$(QUIET) wordsNotKnown	COPYING.text README.md makefile		\
-				$(find Documen/ -type f) 		\
-				$(find Library/ -type f) 		\
-				$(find Support/ -type f) 		\
-				$(find Testing/ -type f) 		\
-				$(find Utility/ -type f) 		
+				$(shell find Documen/ -type f) 		\
+				$(shell find Library/ -type f) 		\
+				$(shell find Support/ -type f) 		\
+				$(shell find Testing/ -type f) 		\
+				$(shell find Utility/ -type f) 		
 
 #----------------------------------------------------------------------------------------------------------------------
 

@@ -166,7 +166,7 @@ INFO:  The script is defined in the ZolmespunLibraryBashing repository.
 INFO:  Install that repository or add ZolmespunLibraryBashing/bin to your PATH.
 ##------------------------------------------------------------------------------------------------------------
 **
-**  Test script for success_demostration
+**  Test script for success_demonstration
 **
 #!/bin/bash
 #
@@ -197,7 +197,7 @@ echo "sourceWithCarePublishFull: $(sourceWithCareGetCommand)"
 
 #
 >>
->>  Output for success_demostration
+>>  Output for success_demonstration
 >>
 [38;5;9mSafe Success[0m
 sourceWithCarePublishSafe: : sourceWithCare 1
@@ -301,7 +301,7 @@ ERROR: A subfolder (Library) was specified but no files were.
 USAGE: sourceWithCarePrepare <repo-name> [ <subfolder-spec> <source-file-name>... ]
 ##------------------------------------------------------------------------------------------------------------
 **
-**  Test script for sucess_only_repo_name
+**  Test script for success_only_repo_name
 **
 #!/bin/bash
 #
@@ -327,7 +327,7 @@ echo "sourceWithCarePublishFull: $(sourceWithCareGetCommand)"
 
 #
 >>
->>  Output for sucess_only_repo_name
+>>  Output for success_only_repo_name
 >>
 sourceWithCarePublishSafe: : sourceWithCare 0; source '%HOME%/Holmespun/HolmespunLibraryBashing/Library/echoInColor.bash'; source '%HOME%/Holmespun/HolmespunLibraryBashing/Library/echoAndExecute.bash'
 sourceWithCarePublishSafe: : sourceWithCare 2

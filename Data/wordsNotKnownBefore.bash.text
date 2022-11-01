@@ -1,6 +1,7 @@
 basename
 cd
 chmod
+cp
 dirname
 elif
 eq
@@ -11,6 +12,10 @@ ge
 le
 ln
 lt
+mkdir
 mv
 ne
+printf
+pwd
 readlink
+umask

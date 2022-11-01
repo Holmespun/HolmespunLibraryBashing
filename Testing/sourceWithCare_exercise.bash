@@ -200,7 +200,7 @@ function success_sourceWithCare_is_predefined() {
   
 #----------------------------------------------------------------------------------------------------------------------
 
-function success_demostration() {
+function success_demonstration() {
   #
   local -r FSpec=${1}
   #
@@ -253,7 +253,7 @@ function failure_no_repo_name() {
 
 #----------------------------------------------------------------------------------------------------------------------
 
-function sucess_only_repo_name() {
+function success_only_repo_name() {
   #
   local -r FSpec=${1}
   #
@@ -276,14 +276,14 @@ run_test success_show_multiple_preparation
 run_test failure_bad_file_name
 run_test failure_bad_repo_name
 
-run_test success_demostration
+run_test success_demonstration
 
 run_test success_sourceWithCare_is_predefined
 
 run_test failure_no_repo_name
 run_test failure_no_file_name
 
-run_test sucess_only_repo_name
+run_test success_only_repo_name
 
 echo "##------------------------------------------------------------------------------------------------------------"
 echo "##  (eof)"

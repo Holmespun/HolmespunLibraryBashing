@@ -66,7 +66,7 @@ function __echoHierarchyListOfDSpec() {
 ###  @param     BaseDirectoryVName The name of a variable that - if set - defines that base/root/parent directory of
 ###             all of the specifications echoed.
 ###  @brief	Displays a list of specifications to existing configuration files based on the HMM configuration
-###             hierachy. The HMM configuration hierarchy includes the directories ${HOME}/.config/holmespun and
+###             hierarchy. The HMM configuration hierarchy includes the directories ${HOME}/.config/holmespun and
 ###             ${HOME} followed by all of the directories from the $PWD down to - but not including - a *base*
 ###             directory in order from those closest to the root directory. If the $PWD is in the $HOME hierarchy then
 ###             the base directory is $HOME; otherwise it is the root (/) directory.

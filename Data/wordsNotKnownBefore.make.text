@@ -1,0 +1,6 @@
+addprefix
+addsuffix
+dir
+findstring
+patsubst
+subst

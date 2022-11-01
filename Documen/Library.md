@@ -300,8 +300,8 @@ $ echoLocalArchiveNameFor myfile.text 2019_10_05_215209
 2019_10_05_215209.Holmespun.HolmespunLibraryBashing.myfile.text
 $ echoLocalArchiveNameFor Testing/myfile.text
 20191005_215443.Holmespun.HolmespunLibraryBashing.Testing.myfile.text
-$ echoLocalArchiveNameFor Bugus/myfile.text
-.20191005_221337.Holmespun.HolmespunLibraryBashing.Bugus.myfile.text
+$ echoLocalArchiveNameFor Bogus/myfile.text
+.20191005_221337.Holmespun.HolmespunLibraryBashing.Bogus.myfile.text
 $
 ```
 

@@ -22,8 +22,8 @@ CLUT Source File: unpackSnapshotArchive.bash.clut (6 cases)
 1.4.1.1. Exit Status 1!
 1.4.1.2. STDERR [text]...
     |USAGE: unpackSnapshotArchive <source-fspec> <target-dspec>
-    |             <source-fspec> identifies a snapshort archive.
-    |             <target-dspec> identifies the directry into which the archive should be unpacked.
+    |             <source-fspec> identifies a snapshot archive.
+    |             <target-dspec> identifies the directory into which the archive should be unpacked.
     |ERROR: Source file specification required.
 1.5. Finalizations.
 1.6. Workspace Impact...
@@ -39,8 +39,8 @@ CLUT Source File: unpackSnapshotArchive.bash.clut (6 cases)
 2.4.1.1. Exit Status 1!
 2.4.1.2. STDERR [text]...
     |USAGE: unpackSnapshotArchive <source-fspec> <target-dspec>
-    |             <source-fspec> identifies a snapshort archive.
-    |             <target-dspec> identifies the directry into which the archive should be unpacked.
+    |             <source-fspec> identifies a snapshot archive.
+    |             <target-dspec> identifies the directory into which the archive should be unpacked.
     |ERROR: Target directory specification required.
 2.5. Finalizations.
 2.6. Workspace Impact...

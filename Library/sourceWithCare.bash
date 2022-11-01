@@ -101,7 +101,7 @@ function sourceWithCarePrepare() {
      #
   fi
   #
-  #  Predefine this file for the zeroeth iteration.
+  #  Predefine this file for the zeroth iteration.
   #
   if [ ${__SourceWithCareIterationPrepared} -eq 0 ]
   then
