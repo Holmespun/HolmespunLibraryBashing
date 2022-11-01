@@ -19,6 +19,17 @@ KamajiFSpec	?= $(shell which kamaji)
 
 #----------------------------------------------------------------------------------------------------------------------
 
+spellcheck :
+	@echo "make $@"
+	$(QUIET) wordsNotKnown	COPYING.text README.md makefile		\
+				$(find Documen/ -type f) 		\
+				$(find Library/ -type f) 		\
+				$(find Support/ -type f) 		\
+				$(find Testing/ -type f) 		\
+				$(find Utility/ -type f) 		
+
+#----------------------------------------------------------------------------------------------------------------------
+
 test :
 	@echo "make $@"
 	$(QUIET) $(KamajiFSpec) grade

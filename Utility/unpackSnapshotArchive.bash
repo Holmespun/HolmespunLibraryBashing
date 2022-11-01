@@ -22,8 +22,8 @@ function __echoErrorAndExit() {
 function __echoUsageErrorAndExit() {
   #
   echo "USAGE: unpackSnapshotArchive <source-fspec> <target-dspec>" 1>&2
-  echo "             <source-fspec> identifies a snapshort archive." 1>&2
-  echo "             <target-dspec> identifies the directry into which the archive should be unpacked." 1>&2
+  echo "             <source-fspec> identifies a snapshot archive." 1>&2
+  echo "             <target-dspec> identifies the directory into which the archive should be unpacked." 1>&2
   #
   __echoErrorAndExit ${*}
   #

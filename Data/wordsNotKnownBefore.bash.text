@@ -1,0 +1,16 @@
+basename
+cd
+chmod
+dirname
+elif
+eq
+esac
+eval
+fi
+ge
+le
+ln
+lt
+mv
+ne
+readlink

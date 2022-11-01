@@ -10,7 +10,7 @@
 ###
 #----------------------------------------------------------------------------------------------------------------------
 #
-#  Copyright (c) 2018-2019 Brian G. Holmes
+#  Copyright (c) 2018-2022 Brian G. Holmes
 #
 #	This program is part of the Holmespun Library Bashing repository.
 #
@@ -34,7 +34,12 @@
 #
 #----------------------------------------------------------------------------------------------------------------------
 
-source $(whereHolmespunLibraryBashing)/Library/echoInColor.bash
+declare -r __WhereHolmespunLibraryBashing=$(whereHolmespunLibraryBashing)
+
+source ${__WhereHolmespunLibraryBashing}/Library/echoInColor.bash
+source ${__WhereHolmespunLibraryBashing}/Library/echoListOfConfigurationFSpec.bash
+
+#----------------------------------------------------------------------------------------------------------------------
 
 declare -r __SeparatorMajor="================"
 declare -r __SeparatorMinor="----------------"
@@ -57,6 +62,25 @@ declare    __Separator=${__SeparatorMajor}
 ###
 #----------------------------------------------------------------------------------------------------------------------
 
+function __echoWordsNotKnownUsage() {
+  #
+  echo "USAGE: wordsNotKnown.bash <file-specification> [ <file-specification> ]..."
+  echo
+  echo "Describe all of the words in the specified files that are not known."
+  echo
+  echo "Users can define .wordsNotKnown.conf configuration files that point to 'known' words files."
+  echo "Every configuration file in directories from / to \${PWD} will be used."
+  echo "Whole words that are found in a 'known' words file will not be reported as not known."
+  echo "Every 'known' word must appear on a line of its own in a 'known' words file."
+  echo
+  echo "A set of predefined 'known' words files are collocated with the wordsNotKnown.bash script."
+  echo "For example, wordsNotKnownBefore.bash.text and .wordsNotKnownBefore.c++.text."
+  echo "Any file listed in the configuration file that cannot be found will be to see if it is predefined."
+  echo
+  #
+}
+#----------------------------------------------------------------------------------------------------------------------
+
 function __wordsNotKnown() {
   #
   local -r ListOfFSpec=${*}
@@ -64,15 +88,11 @@ function __wordsNotKnown() {
   if [ ${#ListOfFSpec} -eq 0 ]
   then
      #
-     echo "USAGE: wordsNotKnown.bash <file-specification>..."
-     echo "USAGE: Check configuration for every directory <file-specification>;"
-     echo "USAGE: List words not known to aspell or configured for every other file."
+     __echoWordsNotKnownUsage >&2
      #
-     exit 1
+     return 1
      #
   fi
-  #
-  echo "wordsNotKnown..."
   #
   local    TargetFSpec TargetDSpec WordNotKnownItem
   #
@@ -100,28 +120,65 @@ function __wordsNotKnown() {
   #
   CommandPrefix+=" | grep --invert-match \"^[A-Z0-9]\\\{,\\\}$\""
   #
-  #  ListOfConfigFSpec: The configuration files to be applied to each file.
+  #  ListOfKnownWordsFSpec: The configuration files to be applied to each file.
+  #
+  local    ConfigFSpec
+  #
+  local    ListOfKnownWordsFSpec=
+  #
+  for ConfigFSpec in $(echoListOfConfigurationFSpec .wordsNotKnown.conf)
+  do
+    #
+    for ItemOfKnownWordsFSpec in $(cat ${ConfigFSpec})
+    do
+      #
+      if [ -f ${ItemOfKnownWordsFSpec} ]
+      then
+         #
+         ListOfKnownWordsFSpec+=" ${ItemOfKnownWordsFSpec}"
+         #
+      else
+	 #
+	 PredefinedKnownWordsFSpec=${__WhereHolmespunLibraryBashing}/Data/$(basename ${ItemOfKnownWordsFSpec})
+	 #
+         if [ -f ${PredefinedKnownWordsFSpec} ]
+         then
+            #
+            ListOfKnownWordsFSpec+=" ${PredefinedKnownWordsFSpec}"
+            #
+         else
+            #
+            echoInColorRed    "ERROR: Invalid 'known' words file path in configuration file."
+            echoInColorYellow "INFO:  While processing the '${ConfigFSpec}' file..."
+            echoInColorYellow "INFO:  The '${ItemOfKnownWordsFSpec}' file does not exist."
+            #
+            return 1
+            #
+	 fi
+	 #
+      fi
+      #
+    done
+    #
+  done
+  #
   #  GrepCompo: Remove words that the user does not want reported.
   #
-  local    ListOfConfigFSpec=
   local    GrepCompo=
   #
-  [ -s ${HOME}/.wordsNotKnown.conf ] && ListOfConfigFSpec+=" ${HOME}/.wordsNotKnown.conf"
-  #
-  [ "${HOME}" != "${PWD}" ] && [ -s ./.wordsNotKnown.conf ] && ListOfConfigFSpec+=" ./.wordsNotKnown.conf"
-  #
-  [ ${#ListOfConfigFSpec} -gt 0 ] && GrepCompo="| grep --word-regexp --invert-match ${ListOfConfigFSpec// / --file=}"
+  if [ ${#ListOfKnownWordsFSpec} -gt 0 ]
+  then
+     #
+     GrepCompo="| grep --line-regexp --invert-match ${ListOfKnownWordsFSpec// / --file=}"
+     #
+  fi
   #
   #  For every file specified...
-  #
-  local -i TargetCount=0
   #
   for TargetFSpec in ${ListOfFSpec}
   do
     #
     [ -d ${TargetFSpec} ] && continue
-    #
-    TargetCount+=1
     #
     TargetDSpec=$(dirname ${TargetFSpec})
     #
@@ -147,35 +204,45 @@ function __wordsNotKnown() {
   #
   #  Report our findings...
   #
+  local -i ResultStatus=0
+  #
   local -r WordNotKnownList=$(for WordNotKnownItem in ${!WordNotKnownBy[*]}; do echo ${WordNotKnownItem}; done | sort)
   #
-  WordNotKnownItem=
-  #
-  for WordNotKnownItem in ${WordNotKnownList}
-  do
-    #
-    echo "${__Separator}"
-    #
-    echoInColorYellow "${WordNotKnownItem}..."
-    #
-    grep --color --with-filename "${WordNotKnownItem}" ${WordNotKnownBy[${WordNotKnownItem}]}
-    #
-    __Separator=${__SeparatorMinor}
-    #
-  done
-  #
-  #  Also let the user know if all words were known.
-  #
-  if [ ${#WordNotKnownItem} -eq 0 ] && [ ${TargetCount} -gt 0 ]
+  if [ ${#WordNotKnownList} -gt 0 ]
   then
+     #
+     echo "wordsNotKnown..."
+     #
+     local -i NotKnownCount=0
+     #
+     WordNotKnownItem=
+     #
+     for WordNotKnownItem in ${WordNotKnownList}
+     do
+       #
+       echo "${__Separator}"
+       #
+       echoInColorYellow "${WordNotKnownItem}..."
+       #
+       grep --color --with-filename "${WordNotKnownItem}" ${WordNotKnownBy[${WordNotKnownItem}]}
+       #
+       __Separator=${__SeparatorMinor}
+       #
+       NotKnownCount+=1
+       #
+     done
      #
      echo "${__Separator}"
      #
-     echo "All words are known."
+     echo "Found ${NotKnownCount} words not known: $(echo ${WordNotKnownList} | tr '\n' ' ')"
+     #
+     echo "${__SeparatorMajor}"
+     #
+     ResultStatus=1
      #
   fi
   #
-  echo "${__SeparatorMajor}"
+  return ${ResultStatus}
   #
 }
 

@@ -9,7 +9,7 @@
 ###
 #----------------------------------------------------------------------------------------------------------------------
 #
-#  Copyright (c) 2020 Brian G. Holmes
+#  Copyright (c) 2020-2022 Brian G. Holmes
 #
 #	This program is part of the Holmespun Library Bashing repository.
 #
