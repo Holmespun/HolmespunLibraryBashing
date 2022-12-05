@@ -74,6 +74,14 @@ indirectFunctionHandlerCall Three
 >>
 ERROR: The indirectFunctionHandlerDeclare function was given an invalid function name.
 USAGE: indirectFunctionHandlerDeclare <identifier> <function-name>
+INFO:  There are 1 targets declared.
+INFO:  The following functions are defined:
+declare -f Alpha
+declare -f Beta
+declare -f Gamma
+declare -f indirectFunctionHandlerCall
+declare -f indirectFunctionHandlerDeclare
+declare -fx which
 Function Alpha was called.
 ##------------------------------------------------------------------------------------------------------------
 **
@@ -131,6 +139,7 @@ indirectFunctionHandlerCall Eight
 Function Beta was called.
 ERROR: Requested indirect call target 'Eight' is not defined.
 INFO:  Request issued within the TEST_SCRIPT.bash file.
-INFO:  Choose one of Seven, Six, Five.
+INFO:  There are 3 targets declared.
+INFO:  Choose one of Five, Six, Seven.
 ##------------------------------------------------------------------------------------------------------------
 ##  (eof)

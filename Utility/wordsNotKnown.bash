@@ -129,8 +129,10 @@ function __wordsNotKnown() {
   for ConfigFSpec in $(echoListOfConfigurationFSpec .wordsNotKnown.conf)
   do
     #
-    for ItemOfKnownWordsFSpec in $(cat ${ConfigFSpec})
+    while read ItemOfKnownWordsFSpec
     do
+      #
+      [ "${ItemOfKnownWordsFSpec:0:1}" = "#" ] && continue
       #
       if [ -f ${ItemOfKnownWordsFSpec} ]
       then
@@ -158,7 +160,7 @@ function __wordsNotKnown() {
 	 #
       fi
       #
-    done
+    done < ${ConfigFSpec}
     #
   done
   #
@@ -169,7 +171,14 @@ function __wordsNotKnown() {
   if [ ${#ListOfKnownWordsFSpec} -gt 0 ]
   then
      #
-     GrepCompo="| grep --line-regexp --invert-match ${ListOfKnownWordsFSpec// / --file=}"
+     GrepCompo="| grep --line-regexp --invert-match"
+     #
+     for ItemOfKnownWordsFSpec in ${ListOfKnownWordsFSpec}
+     do
+       #
+       GrepCompo+=" --file=${ItemOfKnownWordsFSpec}"
+       #
+     done
      #
   fi
   #

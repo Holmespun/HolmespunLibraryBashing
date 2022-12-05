@@ -1,5 +1,7 @@
 Makefile
 Makefiles
+Wconversion
+Wfatal
 XTerm
 al
 alnum
@@ -10,6 +12,7 @@ config
 cvfz
 dev
 dont
+glibc
 makefile
 makefiles
 od
@@ -20,6 +23,8 @@ stdin
 stdout
 sudo
 tmp
+tty
 tz
 usr
+utf
 xvfz

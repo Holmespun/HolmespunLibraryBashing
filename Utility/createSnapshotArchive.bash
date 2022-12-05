@@ -52,7 +52,9 @@ function __createSnapshotArchive() {
   #
   local -r InnputFName=$(basename ${ActualSourceFSpec})
   #
-  tar cvfz ${GivenTargetDSpec}/${OutputFName}.tz		\
+  #  The tar option '--sort=name' does not perform as advertised.
+  #
+  tar cvfz ${GivenTargetDSpec}/${OutputFName}.tz	\
       --transform=s/${InnputFName}/${OutputFName}/ --show-transformed-names ${ActualSourceFSpec}
   #
   [ ${?} -ne 0 ] && __echoErrorAndExit "Unable to create archive."

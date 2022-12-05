@@ -66,7 +66,7 @@ function __unpackSnapshotArchive() {
   #
   cd ${GivenTargetDSpec}
      #
-     tar xvfz ${InnputFSpec}
+     tar xvfz ${InnputFSpec} | sort
      #
      [ ${?} -ne 0 ] && __echoErrorAndExit "Unable to unpack archive."
      #

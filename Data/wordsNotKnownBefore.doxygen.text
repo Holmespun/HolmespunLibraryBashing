@@ -1,6 +1,11 @@
 Doxygen
+copydoc
+defgroup
 doxygen
 endcode
 fn
+ingroup
 param
+todo
+tparam
 unparsed
