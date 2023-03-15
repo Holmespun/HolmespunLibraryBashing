@@ -5,7 +5,6 @@
 ###  @file
 ###  @author	Brian G. Holmes
 ###  @copyright	GNU General Public License
-###  @brief	Defines a function for generating a list of specifications to existing configuration files.
 ###
 #----------------------------------------------------------------------------------------------------------------------
 #

@@ -79,6 +79,59 @@ function __echoWordsNotKnownUsage() {
   echo
   #
 }
+
+#----------------------------------------------------------------------------------------------------------------------
+
+function __echoListOfConfiguredDataFSpec() {
+  #
+  local	-r ConfigFName=${1}
+  #
+  local    ConfigFSpec ConfigDataLine
+  #
+  local    PossibleDataFName
+  local    PossibleDataFSpec
+  #
+  local    ItemOfDataFSpec PossibleDataFSpec
+  #
+  #  Returns a list that has no predictable order.
+  #
+  local -A ListOfDataFSpec
+  #
+  for ConfigFSpec in $(echoListOfConfigurationFSpec ${ConfigFName})
+  do
+    #
+    while read ConfigDataLine
+    do
+      #
+      [ ${#ConfigDataLine} -eq 0 ] && continue
+      #
+      [ "${ConfigDataLine:0:1}" = "#" ] && continue
+      #
+      ItemOfDataFSpec=$(eval echo ${ConfigDataLine})
+      #
+      if [ -f ${ItemOfDataFSpec} ]
+      then
+         #
+         ListOfDataFSpec["${ItemOfDataFSpec}"]="Use"
+         #
+      else
+         #
+         echoInColorRed    "ERROR: Invalid 'known' words file specification configured."	>&2
+         echoInColorYellow "INFO:  While processing the '${ConfigFSpec}' file..."		>&2
+         echoInColorYellow "INFO:  The file named '${ConfigDataLine}' could not be resolved."	>&2
+         #
+         return 1
+         #
+      fi
+      #
+    done < ${ConfigFSpec}
+    #
+  done
+  #
+  echo ${!ListOfDataFSpec[*]}
+  #
+}
+
 #----------------------------------------------------------------------------------------------------------------------
 
 function __wordsNotKnown() {
@@ -122,65 +175,24 @@ function __wordsNotKnown() {
   #
   #  ListOfKnownWordsFSpec: The configuration files to be applied to each file.
   #
-  local    ConfigFSpec
+  local    ItemOfKnownWordsFSpec
   #
-  local    ListOfKnownWordsFSpec=
+  local    ListOfKnownWordsFSpec=$(__echoListOfConfiguredDataFSpec .wordsNotKnown.conf)
   #
-  for ConfigFSpec in $(echoListOfConfigurationFSpec .wordsNotKnown.conf)
-  do
-    #
-    while read ItemOfKnownWordsFSpec
-    do
-      #
-      [ "${ItemOfKnownWordsFSpec:0:1}" = "#" ] && continue
-      #
-      if [ -f ${ItemOfKnownWordsFSpec} ]
-      then
-         #
-         ListOfKnownWordsFSpec+=" ${ItemOfKnownWordsFSpec}"
-         #
-      else
-	 #
-	 PredefinedKnownWordsFSpec=${__WhereHolmespunLibraryBashing}/Data/$(basename ${ItemOfKnownWordsFSpec})
-	 #
-         if [ -f ${PredefinedKnownWordsFSpec} ]
-         then
-            #
-            ListOfKnownWordsFSpec+=" ${PredefinedKnownWordsFSpec}"
-            #
-         else
-            #
-            echoInColorRed    "ERROR: Invalid 'known' words file path in configuration file."
-            echoInColorYellow "INFO:  While processing the '${ConfigFSpec}' file..."
-            echoInColorYellow "INFO:  The '${ItemOfKnownWordsFSpec}' file does not exist."
-            #
-            return 1
-            #
-	 fi
-	 #
-      fi
-      #
-    done < ${ConfigFSpec}
-    #
-  done
+  [ ${#ListOfKnownWordsFSpec} -eq 0 ] && return 1
   #
   #  GrepCompo: Remove words that the user does not want reported.
   #
   local    GrepCompo=
   #
-  if [ ${#ListOfKnownWordsFSpec} -gt 0 ]
-  then
-     #
-     GrepCompo="| grep --line-regexp --invert-match"
-     #
-     for ItemOfKnownWordsFSpec in ${ListOfKnownWordsFSpec}
-     do
-       #
-       GrepCompo+=" --file=${ItemOfKnownWordsFSpec}"
-       #
-     done
-     #
-  fi
+  GrepCompo="| grep --line-regexp --invert-match"
+  #
+  for ItemOfKnownWordsFSpec in ${ListOfKnownWordsFSpec}
+  do
+    #
+    GrepCompo+=" --file=${ItemOfKnownWordsFSpec}"
+    #
+  done
   #
   #  For every file specified...
   #

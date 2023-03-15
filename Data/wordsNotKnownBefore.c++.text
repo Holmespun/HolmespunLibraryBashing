@@ -1,3 +1,5 @@
+Namespace
+Namespaces
 argc
 argv
 bool
@@ -37,6 +39,7 @@ mblen
 memset
 mktime
 namespace
+namespaces
 nodiscard
 noexcept
 npos
